@@ -1,0 +1,19 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ersnover/stroke-router.git"
+  },
+  "author": "Eric Snover & Kelsey Gaetjens",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ersnover/stroke-router/issues"
+  },
+  "homepage": "https://github.com/ersnover/stroke-router#readme"
+}
