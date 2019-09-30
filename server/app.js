@@ -19,6 +19,9 @@ mongoose.connect(`mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@stroke-route
     }
 })
 
+const userRouter = require('./routes/userRoute')
+app.use('/u', userRouter)
+
 app.listen(PORT, () => {
     console.log("Server is running...")
 })

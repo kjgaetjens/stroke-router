@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
+var mongoose = require('mongoose')
+
 const bcrypt = require('bcrypt')
 const saltRounds = 10
 
@@ -14,7 +16,9 @@ router.post('/register', (req,res) => {
     bcrypt.hash(password, saltRounds, (error, hash) => {
         if (error) {
             res.json({error: error})
-        } else {}
+        } else {
+            // find user in DB
+        }
     })
 })
 
