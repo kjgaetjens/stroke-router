@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-var mongoose = require('mongoose')
+const userModels = require('../models/user')
 
 const bcrypt = require('bcrypt')
 const saltRounds = 10
@@ -10,14 +10,42 @@ const jwt = require('jsonwebtoken')
 
 // register new user
 router.post('/register', (req,res) => {
-    let username = req.body.username
-    let password = req.body.password
 
-    bcrypt.hash(password, saltRounds, (error, hash) => {
+    let newUser = {
+        username: req.body.username,
+        password: req.body.password,
+        emsAffiliation: req.body.emsAffiliation
+    }
+
+    userModels.EMSUser.findOne({username: newUser.username}, (error, existingUser) => {
         if (error) {
             res.json({error: error})
+        }
+        if (existingUser) {
+            res.json({error: "Username taken"})
         } else {
-            // find user in DB
+            bcrypt.hash(newUser.password, saltRounds, (error, hash) => {
+                if (error) {
+                    res.json({error: "Could not encrypt password. Password not saved"})
+                } else {
+
+                    newUser.password = hash
+                    const token = jwt.sign({username: newUser.username}, process.env.PRIVATE_KEY)
+
+                    userModels.EMSUser.create(newUser, (error, user) => error ? res.json({error: "Could not register user"}) : res.json({token: token, userId: user._id}))
+                }
+            })
+        }
+    })
+})
+
+router.post('/login', (req, res) => {
+    userModels.EMSUser.findOne({username: req.body.username}, (error, user) => {
+        if (user) {
+            let token = jwt.sign({username: req.body.username}, process.env.PRIVATE_KEY)
+            bcrypt.compare(req.body.password, user.password, (error, result) => result ? res.json({token: token, userId: user._id}) : res.json({error: "Incorrect password"}))
+        } else if (error) {
+            res.json({error: "User does not exist"})
         }
     })
 })
