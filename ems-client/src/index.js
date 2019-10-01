@@ -5,19 +5,22 @@ import {createStore, combineReducers} from 'redux'
 import {Provider} from 'react-redux'
 import App from './App'
 import Assessment from './components/Assessment'
+import './css/index.css'
 import * as serviceWorker from './serviceWorker';
 
-import authorizationReducer from './store/reducers/authorization'
-import assessmentReducer from './store/reducers/assessment'
+import authorizationReducer from './store/reducers/authReducer'
+import Authenticate from './components/HOC/requireAuth'
+import {setAuthenticationHeader} from './utils/authenticate'
+
+import Login from './components/assessment-components/login'
+// import assessmentReducer from './store/reducers/assessment'
 const rootReducer = combineReducers({
-    authReducer: authorizationReducer, 
-    assessReducer: assessmentReducer
+    auth: authorizationReducer, 
+    // assessReducer: assessmentReducer
 })
 
 const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
-import Authenticate from './components/HOC/requireAuth'
-import {setAuthenticationHeader} from './utils/authenticate'
 
 let token = localStorage.getItem('jsonwebtoken')
 setAuthenticationHeader(token)
@@ -28,6 +31,7 @@ ReactDOM.render(
     <Provider store={store}>
         <App>
             <Switch>
+                <Route exact path='/' component={Login} />
                 <Route path="/assessment" component={Authenticate(Assessment)} />
             </Switch>
         </App>

@@ -3,17 +3,17 @@ import {connect} from 'react-redux'
 
 export default ComposedComponent => {
     class Authenticate extends Component {
-        // componentWillMount() {
-        //     if (!this.props.isAuth) {
-        //         this.props.history.push('/')
-        //     }
-        // }
+        componentWillMount() {
+            if (!this.props.isAuth) {
+                this.props.history.push('/')
+            }
+        }
 
-        // componentDidUpdate() {
-        //     if (!this.props.isAuth) {
-        //         this.props.history.push('/')
-        //     }
-        // }
+        componentDidUpdate() {
+            if (!this.props.isAuth) {
+                this.props.history.push('/')
+            }
+        }
 
         render() {
             return (
@@ -24,7 +24,7 @@ export default ComposedComponent => {
 
     const mapStateToProps = (state) => {
         return {
-            isAuth: state.isAuth
+            isAuth: state.auth.isAuth
         }
     }
 
