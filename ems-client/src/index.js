@@ -16,13 +16,19 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
+import Authenticate from './components/HOC/requireAuth'
+import {setAuthenticationHeader} from './utils/authenticate'
+
+let token = localStorage.getItem('jsonwebtoken')
+setAuthenticationHeader(token)
+
 
 ReactDOM.render(
     <BrowserRouter>
     <Provider store={store}>
         <App>
             <Switch>
-                <Route path="/assessment" component={Assessment} />
+                <Route path="/assessment" component={Authenticate(Assessment)} />
             </Switch>
         </App>
     </Provider>
