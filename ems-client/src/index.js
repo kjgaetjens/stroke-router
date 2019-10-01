@@ -1,14 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
-import {createStore} from 'redux'
+import {createStore, combineReducers} from 'redux'
 import {Provider} from 'react-redux'
-import reducer from './store/reducer'
 import App from './App'
 import Assessment from './components/Assessment'
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
+import authorizationReducer from './store/reducers/authorization'
+import assessmentReducer from './store/reducers/assessment'
+const rootReducer = combineReducers({
+    authReducer: authorizationReducer, 
+    assessReducer: assessmentReducer
+})
+
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 
 ReactDOM.render(

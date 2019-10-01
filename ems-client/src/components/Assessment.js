@@ -1,5 +1,6 @@
 import React,{useState, useEffect} from 'react';
-import axios from 'axios'
+import { connect } from 'react-redux'
+import * as actionCreators from '../store/actions/actionCreators'
 
 //tpa questions
 import AgeUnder80 from './assessment-components/tpa/AgeUnder80'
@@ -24,16 +25,13 @@ function Assessment(props) {
     
     //store patient id in redux
 
-    //store answers in redux
-
-    //store question count in redux
-
     //how will conditional question flow work? do i need to nest some question components in other question components so that when theyre in that next, it goes to the relevant next?
     //need to figure out from eric which are conditional first
 
     const [componentToRender, setComponentToRender] = useState(1)
 
 
+    //update to use redux for component to render
     const renderQuestion = () => {
         switch (componentToRender) {
             case 1:
