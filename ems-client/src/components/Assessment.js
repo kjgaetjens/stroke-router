@@ -35,33 +35,33 @@ function Assessment(props) {
     const renderQuestion = () => {
         switch (componentToRender) {
             case 1:
-                return <AgeUnder80 />
+                return <AgeUnder80 nextQuestion={setComponentToRender}/>
             case 2:
-                return <AgeOver18 />
+                return <AgeOver18 prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
             case 3:
-                return <LastKnownWell />
+                return <LastKnownWell prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
             case 4:
-                return <RecentSurgery />
+                return <RecentSurgery prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
             case 5:
-                return <Pregnancy />
+                return <Pregnancy prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
             case 6:
-                return <Anticoagulants />
+                return <Anticoagulants prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
             case 7:
-                return <FacialPalsy />
+                return <FacialPalsy prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
             case 8:
-                return <ArmMotorImpairment />
+                return <ArmMotorImpairment prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
             case 9:
-                return <LegMotorImpairment />
+                return <LegMotorImpairment prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
             case 10:
-                return <GazeDeviation />
+                return <GazeDeviation prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
             case 11:
-                return <Hemiparesis />
+                return <Hemiparesis prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
             case 12:
-                return <Agnosia />
+                return <Agnosia prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
             case 13:
-                return <Aphasia />
+                return <Aphasia prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
             case 14:
-                return <Score />
+                return <Score prevQuestion={setComponentToRender} />
         }
     }
 
