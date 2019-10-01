@@ -28,7 +28,7 @@ const tpaSchema = new mongoose.Schema({
     lkw: String, // might have to create our own date object or store as string and do the conversion on the app.js side?
     recSurgery: Boolean,
     pregnancy: Boolean,
-    angicoagulants: Boolean
+    anticoagulants: Boolean
 })
 const TPA = mongoose.model('TPA', tpaSchema)
 
