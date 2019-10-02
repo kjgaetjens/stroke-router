@@ -3,7 +3,8 @@ const userModels = require('../models/user')
 
 
 const emsAuth = (req,res,next) => {
-    console.log('middleware called...')
+    console.log('ems middleware called...')
+    console.log(req.headers)
     let headers = req.headers['authorization']
 
     if (headers) {
@@ -22,7 +23,7 @@ const emsAuth = (req,res,next) => {
 
 
 const edAuth = (req,res,next) => {
-    console.log('middleware called...')
+    console.log('ed middleware called...')
     let headers = req.headers['authorization']
 
     if (headers) {

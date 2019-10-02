@@ -14,9 +14,12 @@ app.use(express.urlencoded({extended: true}))
 const userRouter = require('./routes/userRoute')
 app.use('/u', userRouter)
 
+const patientRouter = require('./routes/patientRoute')
+app.use('/patient', patientRouter)
+
 // middleware
 const authenticate = require('./middleware/authMiddleware')
-// app.all('/ems/*', authenticate.ems)
+app.all('/*/ems', authenticate.ems)
 // app.all('/ed/*', authenticate.ed)
 
 const PORT = process.env.PORT
