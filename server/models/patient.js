@@ -25,7 +25,8 @@ const EMS = mongoose.model('EMS', emsSchema)
 const tpaSchema = new mongoose.Schema({
     ageUnder80: Boolean,
     ageOver18: Boolean,
-    lkw: String, // might have to create our own date object or store as string and do the conversion on the app.js side?
+    lkw: String,
+    timeSinceLkw: String,
     recSurgery: Boolean,
     pregnancy: Boolean,
     anticoagulants: Boolean

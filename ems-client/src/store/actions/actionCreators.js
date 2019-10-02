@@ -1,3 +1,8 @@
+
+/*
+
+DEPRECATED
+
 import * as actionTypes from './actionTypes'
 
 export const setAuthState = (user) => {
@@ -39,3 +44,4 @@ export const decrementComponentToRender = () => {
         type: actionTypes.DEC_COMP_TO_RENDER
     }
 }
+*/
