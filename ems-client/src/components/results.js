@@ -10,19 +10,21 @@ const Results = (props) => {
 
     const triage = {
         tPA: {
+            ageUnder80: true,
+            ageOver18: true,
             ageInRange: true,
+            lastKnownWell: "12:45:00",
             timeSinceLKW: 3.2,
-            anticoags: false,
-            LKW: "12:45:00",
+            recentSurgery: false,
             pregnancy: false,
-            recentSurgery: false
+            anticoagulants: false
 
         },
         race: {
             facialPalsy: 1,
-            armMotor: 1,
-            legMotor: 2,
-            gazeDev: 1,
+            armMotorImpairment: 1,
+            legMotorImpairment: 2,
+            gazeDeviation: 1,
             hemiparesis: "left",
             agnosia: 1,
             aphasia: null
