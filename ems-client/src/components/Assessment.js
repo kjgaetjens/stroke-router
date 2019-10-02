@@ -26,6 +26,7 @@ function Assessment(props) {
     const [tpa, setTpa] = useState({
                                     ageUnder80: null | Boolean,
                                     ageOver18: null | Boolean,
+                                    ageInRange: null | Boolean,
                                     lastKnownWell: null | String,
                                     timeSinceLkW: null | String,
                                     recentSurgery: null | Boolean,
@@ -33,14 +34,14 @@ function Assessment(props) {
                                     anticoagulants: null | Boolean
                                     })
     const [race, setRace] = useState({
-                                    facialPalsy: null | Boolean,
-                                    armMotorImpairment: null | Boolean,
-                                    legMotorImpairment: null | Boolean,
-                                    gazeDeviation: null | Boolean,
-                                    hemiparesis: null | Boolean,
-                                    agnosia: null | Boolean,
-                                    aphasia: null | Boolean,
-                                    score: null | Boolean
+                                    facialPalsy: null | Number,
+                                    armMotorImpairment: null | Number,
+                                    legMotorImpairment: null | Number,
+                                    gazeDeviation: null | Number,
+                                    hemiparesis: null | Number,
+                                    agnosia: null | Number,
+                                    aphasia: null | Number,
+                                    score: null | Number
                                     })
 
     const handleTpaAnswer = (keyName, valueName) => {
