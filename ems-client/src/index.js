@@ -3,16 +3,20 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import {createStore, combineReducers} from 'redux'
 import {Provider} from 'react-redux'
-import App from './App'
-import Assessment from './components/Assessment'
 import './css/index.css'
 import * as serviceWorker from './serviceWorker';
+
+import App from './App'
+import Login from './components/assessment-components/login'
+import Assessment from './components/Assessment'
+import Results from './components/results'
+
 
 import authorizationReducer from './store/reducers/authReducer'
 import Authenticate from './components/HOC/requireAuth'
 import {setAuthenticationHeader} from './utils/authenticate'
 
-import Login from './components/assessment-components/login'
+
 // import assessmentReducer from './store/reducers/assessment'
 const rootReducer = combineReducers({
     auth: authorizationReducer, 
@@ -33,6 +37,7 @@ ReactDOM.render(
             <Switch>
                 <Route exact path='/' component={Login} />
                 <Route path="/assessment" component={Authenticate(Assessment)} />
+                <Route path='/recommendation' component={Authenticate(Results)} />
             </Switch>
         </App>
     </Provider>
