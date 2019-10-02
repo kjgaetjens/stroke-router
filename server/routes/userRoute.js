@@ -8,6 +8,7 @@ const saltRounds = 10
 
 const jwt = require('jsonwebtoken')
 
+// EMS -----------------------------------------------------
 // register new user
 router.post('/register', (req,res) => {
     console.log('register')
