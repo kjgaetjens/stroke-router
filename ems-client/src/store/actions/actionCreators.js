@@ -5,6 +5,20 @@ DEPRECATED
 
 import * as actionTypes from './actionTypes'
 
+export const setAuthState = (user) => {
+    return {
+        type: 'SET_AUTH',
+        payload: user
+    }
+}
+
+export const setUser = (userId) => {
+    return {
+        type: 'SET_USER',
+        payload: userId
+    }
+}
+
 export const setPatient = (patientId) => {
     return {
         type: actionTypes.SET_PATIENT, 
