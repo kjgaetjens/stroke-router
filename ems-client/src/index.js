@@ -8,10 +8,8 @@ import Assessment from './components/Assessment'
 import * as serviceWorker from './serviceWorker';
 
 import authorizationReducer from './store/reducers/authorization'
-import assessmentReducer from './store/reducers/assessment'
 const rootReducer = combineReducers({
-    authReducer: authorizationReducer, 
-    assessReducer: assessmentReducer
+    authReducer: authorizationReducer
 })
 
 const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())

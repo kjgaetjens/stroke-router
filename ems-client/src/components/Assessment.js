@@ -18,50 +18,68 @@ import GazeDeviation from './assessment-components/race/GazeDeviation'
 import Hemiparesis from './assessment-components/race/Hemiparesis'
 import Agnosia from './assessment-components/race/Agnosia'
 import Aphasia from './assessment-components/race/Aphasia'
-import Score from './assessment-components/race/Score'
 
 
 function Assessment(props) {
-    
-    //store patient id in redux
-
-    //how will conditional question flow work? do i need to nest some question components in other question components so that when theyre in that next, it goes to the relevant next?
-    //need to figure out from eric which are conditional first
 
     const [componentToRender, setComponentToRender] = useState(1)
+    const [tpa, setTpa] = useState({
+                                    ageUnder80: null | Boolean,
+                                    ageOver18: null | Boolean,
+                                    lastKnownWell: null | String,
+                                    timeSinceLkW: null | String,
+                                    recentSurgery: null | Boolean,
+                                    pregnancy: null | Boolean,
+                                    anticoagulants: null | Boolean
+                                    })
+    const [race, setRace] = useState({
+                                    facialPalsy: null | Boolean,
+                                    armMotorImpairment: null | Boolean,
+                                    legMotorImpairment: null | Boolean,
+                                    gazeDeviation: null | Boolean,
+                                    hemiparesis: null | Boolean,
+                                    agnosia: null | Boolean,
+                                    aphasia: null | Boolean,
+                                    score: null | Boolean
+                                    })
 
+    const handleTpaAnswer = (keyName, valueName) => {
+        setTpa({...tpa, [keyName]: valueName})
+    }
 
-    //update to use redux for component to render
+    const handleRaceAnswer = (keyName, valueName) => {
+        setRace({...race, [keyName]: valueName})
+    }
+    //if go back on conditionals, will have to clear state for related question or set conditional logic on determination
+
     const renderQuestion = () => {
         switch (componentToRender) {
             case 1:
-                return <AgeUnder80 nextQuestion={setComponentToRender}/>
+                return <AgeUnder80 nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer}/>
             case 2:
-                return <AgeOver18 prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
+                return <AgeOver18 prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer} />
             case 3:
-                return <LastKnownWell prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
+                return <LastKnownWell prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer} />
             case 4:
-                return <RecentSurgery prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
+                return <RecentSurgery prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer} />
             case 5:
-                return <Pregnancy prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
+                return <Pregnancy prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer} />
             case 6:
-                return <Anticoagulants prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
+                return <Anticoagulants prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer} />
             case 7:
-                return <FacialPalsy prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
+                return <FacialPalsy prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} />
             case 8:
-                return <ArmMotorImpairment prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
+                return <ArmMotorImpairment prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} />
             case 9:
-                return <LegMotorImpairment prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
+                return <LegMotorImpairment prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} />
             case 10:
-                return <GazeDeviation prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
+                return <GazeDeviation prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} />
             case 11:
-                return <Hemiparesis prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
+                return <Hemiparesis prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} />
             case 12:
-                return <Agnosia prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
+                return <Agnosia prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} />
             case 13:
-                return <Aphasia prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} />
-            case 14:
-                return <Score prevQuestion={setComponentToRender} />
+                return <Aphasia prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} />
         }
     }
 
