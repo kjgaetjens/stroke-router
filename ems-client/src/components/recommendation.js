@@ -5,7 +5,6 @@ const Recommendations = (props) => {
 
     const [raceScore, setRaceScore] = useState(0)
 
-
     const recommendationText = {
         both: 'Patient is highly likely (> 85%) to have a Large Vessel Occlusion, but also may be a candidate for tPA. It is recommended to transport patient directly to a Thrombectomy-Capable Stroke Center, unless this doing so will substantially increase travel time.',
         lvo: 'Patient is highly likely (> 85%) to have a Large Vessel Occlusion, and is also not a candidate for tPA. It is recommended to transport patient directly to a Thrombectomy-Capable Stroke Center for further treatment.',

@@ -1,21 +1,21 @@
 import React from 'react';
 
-function AgeUnder80(props) {
+function AgeInRange(props) {
 
     const submitAnswer = (answer) => {
-        props.setAnswer('ageUnder80', answer)
-        props.nextQuestion(2)
+        props.setAnswer('ageInRange', answer)
+        props.nextQuestion('LastKnownWell')
     }
 
     return (
         <div>
-            AgeUnder80
+            AgeInRange
             <button onClick={() => submitAnswer(true)}>Yes</button>
             <button onClick={() => submitAnswer(false)}>No</button>
-            <button onClick={() => props.nextQuestion(2)}>Unknown</button>
+            <button onClick={() => props.nextQuestion('LastKnownWell')}>Unknown</button>
         </div>
     );
 
 }
 
-export default AgeUnder80;
+export default AgeInRange;
