@@ -23,8 +23,7 @@ const emsSchema = new mongoose.Schema({
 const EMS = mongoose.model('EMS', emsSchema)
 
 const tpaSchema = new mongoose.Schema({
-    ageUnder80: Boolean,
-    ageOver18: Boolean,
+    ageInRange: Boolean,
     lkw: String,
     timeSinceLkw: String,
     recSurgery: Boolean,
@@ -34,13 +33,14 @@ const tpaSchema = new mongoose.Schema({
 const TPA = mongoose.model('TPA', tpaSchema)
 
 const raceSchema = new mongoose.Schema({
-    facialPalsy: Boolean,
-    armMotorImpairment: Boolean,
-    legMotorImpairment: Boolean,
-    gazeDeviation: Boolean,
+    facialPalsy: Number,
+    armMotorImpairment: Number,
+    legMotorImpairment: Number,
+    gazeDeviation: Number,
     hemiparesis: Boolean,
-    agnosia: Boolean,
-    aphasia: Boolean,
+    hemiparesisSide: String,
+    agnosia: Number,
+    aphasia: Number,
     score: Number
 })
 const Race = mongoose.model('Race', raceSchema)
