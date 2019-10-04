@@ -1,5 +1,4 @@
 import React,{useState} from 'react';
-import {Redirect} from 'react-router-dom'
 
 //tpa questions
 import AgeInRange from './assessment-components/tpa/AgeInRange'
@@ -19,6 +18,14 @@ import Aphasia from './assessment-components/race/Aphasia'
 
 
 function Assessment(props) {
+
+    let vh = window.innerHeight * 0.01
+    document.documentElement.style.setProperty('--vh', `${vh}px`)
+
+    window.addEventListener('resize', () => {
+        let vh = window.innerheight * 0.01
+        document.documentElement.style.setProperty('--vh', `${vh}px`)
+    })
 
     const [componentToRender, setComponentToRender] = useState('AgeInRange')
     const [tpa, setTpa] = useState({
@@ -71,10 +78,42 @@ function Assessment(props) {
         props.history.push('/recommendation', {tpa: {...tpa, timeSinceLkw: hoursSinceLkw}, race: race})
     }
 
+    let percentComplete = '5%'
+    const updatePercentComplete = () => {
+        switch (componentToRender) {
+            case 'AgeInRange':
+                return '5%'
+            case 'LastKnownWell':
+                return '9%'
+            case 'RecentSurgery':
+                return '18%'
+            case 'Pregnancy':
+                return '27%'
+            case 'Anticoagulants':
+                return '36%'
+            case 'FacialPalsy':
+                return '45%'
+            case 'ArmMotorImpairment':
+                return '54%'
+            case 'LegMotorImpairment':
+                return '63%'
+            case 'GazeDeviation':
+                return '72%'
+            case 'Hemiparesis':
+                return '81%'
+            case 'Agnosia':
+                return '90%'
+            case 'Aphasia':
+                return '90%'
+        }
+    }
+    updatePercentComplete()
+    document.documentElement.style.setProperty('--percentComplete', `${percentComplete}`)
+
     const renderQuestion = () => {
         switch (componentToRender) {
             case 'AgeInRange':
-                return <AgeInRange nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer}/>
+                return <AgeInRange nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer} />
             case 'LastKnownWell':
                 return <LastKnownWell prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer} />
             case 'RecentSurgery':
@@ -103,7 +142,7 @@ function Assessment(props) {
     // useEffect(() => {},[])
 
     return (
-        <div>
+        <div className="assessment">
             {renderQuestion()}
         </div>
     );

@@ -1,0 +1,87 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+.assessment {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    background-color: lightgrey;
+}
+
+.assessment-header {
+    height: 4vh;
+    height: calc(var(--vh, 1vh) * 4);
+}
+
+.assessment-header h3 {
+    margin: 0;
+    margin-left: 15px;
+    display: inline-block;
+}
+
+.progress-border {
+    height: 15px;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    border: 2px solid black;
+    border-radius: 3px;
+}
+
+.progress-fill {
+    background-color:white;
+    height: 100%;
+    width: var(--percentComplete);
+    border-radius: 3px;
+}
+
+.assessment-container {
+    height: 96vh;
+    height: calc(var(--vh, 1vh) * 96);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.question-container {
+    margin-top: 10vh;
+    margin-top: calc(var(--vh, 1vh) * 10);
+    margin-left: 8%;
+    margin-right: 8%;
+    padding: 18px 24px;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 3px 21px rgba(0, 0, 0, 0.25), 0 4px 9px rgba(0, 0, 0, 0.22)
+    /* make this a white container with rounded border and shadow for now i guess */
+}
+
+.question-container h1 {
+    margin: 0;
+}
+
+.answer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5vh;
+    margin-bottom: calc(var(--vh, 1vh) * 5);
+}
+
+.answer-container button {
+    background-color: white;
+    color: black;
+    width: 84%;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 1px 7px rgba(0, 0, 0, 0.25), 0 3px 5px rgba(0, 0, 0, 0.22);
+    padding: 10px 20px;
+    font-size: 1.2em;
+    /* throw some on click shadow effect here */
+    /* maybe change all of this to flat ui - seems to be the trend */
+}
