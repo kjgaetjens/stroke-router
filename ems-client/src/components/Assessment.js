@@ -1,10 +1,7 @@
-import React,{useState, useEffect} from 'react';
-import { connect } from 'react-redux'
-import * as actionCreators from '../store/actions/actionCreators'
+import React,{useState} from 'react';
 
 //tpa questions
-import AgeUnder80 from './assessment-components/tpa/AgeUnder80'
-import AgeOver18 from './assessment-components/tpa/AgeOver18'
+import AgeInRange from './assessment-components/tpa/AgeInRange'
 import LastKnownWell from './assessment-components/tpa/LastKnownWell'
 import RecentSurgery from './assessment-components/tpa/RecentSurgery'
 import Pregnancy from './assessment-components/tpa/Pregnancy'
@@ -22,25 +19,32 @@ import Aphasia from './assessment-components/race/Aphasia'
 
 function Assessment(props) {
 
-    const [componentToRender, setComponentToRender] = useState(1)
+    let vh = window.innerHeight * 0.01
+    document.documentElement.style.setProperty('--vh', `${vh}px`)
+
+    window.addEventListener('resize', () => {
+        let vh = window.innerheight * 0.01
+        document.documentElement.style.setProperty('--vh', `${vh}px`)
+    })
+
+    const [componentToRender, setComponentToRender] = useState('AgeInRange')
     const [tpa, setTpa] = useState({
-                                    ageUnder80: null | Boolean,
-                                    ageOver18: null | Boolean,
+                                    ageInRange: null | Boolean,
                                     lastKnownWell: null | String,
-                                    timeSinceLkW: null | String,
+                                    timeSinceLkw: null | String,
                                     recentSurgery: null | Boolean,
                                     pregnancy: null | Boolean,
                                     anticoagulants: null | Boolean
                                     })
     const [race, setRace] = useState({
-                                    facialPalsy: null | Boolean,
-                                    armMotorImpairment: null | Boolean,
-                                    legMotorImpairment: null | Boolean,
-                                    gazeDeviation: null | Boolean,
+                                    facialPalsy: null | Number,
+                                    armMotorImpairment: null | Number,
+                                    legMotorImpairment: null | Number,
+                                    gazeDeviation: null | Number,
                                     hemiparesis: null | Boolean,
-                                    agnosia: null | Boolean,
-                                    aphasia: null | Boolean,
-                                    score: null | Boolean
+                                    hemiparesisSide: null | String,
+                                    agnosia: null | Number,
+                                    aphasia: null | Number
                                     })
 
     const handleTpaAnswer = (keyName, valueName) => {
@@ -48,45 +52,97 @@ function Assessment(props) {
     }
 
     const handleRaceAnswer = (keyName, valueName) => {
-        setRace({...race, [keyName]: valueName})
+        if (typeof keyName === 'string') {
+            setRace({...race, [keyName]: valueName})
+        } else {
+            setRace({...race, [keyName[0]]: valueName[0], [keyName[1]]: valueName[1]})
+        }
+        
     }
-    //if go back on conditionals, will have to clear state for related question or set conditional logic on determination
+
+    const sendToCalcScore = () => {
+        const currentDateTime = new Date()
+
+        let lastKnownWell = tpa.lastKnownWell
+        let lkwYear = parseInt(lastKnownWell.slice(0,4))
+        let lkwMonth = parseInt(lastKnownWell.slice(5,7)) - 1
+        let lkwDay = parseInt(lastKnownWell.slice(8,10))
+        let lkwHours = parseInt(lastKnownWell.slice(11,13))
+        let lkwMinutes = parseInt(lastKnownWell.slice(14,16))
+        let lkwSeconds = parseInt(lastKnownWell.slice(17,20))
+        const lkwDateTime = new Date(lkwYear, lkwMonth, lkwDay, lkwHours, lkwMinutes, lkwSeconds)
+
+        const timeSinceLkw = currentDateTime - lkwDateTime
+        const hoursSinceLkw = Math.trunc(timeSinceLkw/3600000)
+
+        props.history.push('/recommendation', {tpa: {...tpa, timeSinceLkw: hoursSinceLkw}, race: race})
+    }
+
+    let percentComplete = '5%'
+    const updatePercentComplete = () => {
+        switch (componentToRender) {
+            case 'AgeInRange':
+                return '5%'
+            case 'LastKnownWell':
+                return '9%'
+            case 'RecentSurgery':
+                return '18%'
+            case 'Pregnancy':
+                return '27%'
+            case 'Anticoagulants':
+                return '36%'
+            case 'FacialPalsy':
+                return '45%'
+            case 'ArmMotorImpairment':
+                return '54%'
+            case 'LegMotorImpairment':
+                return '63%'
+            case 'GazeDeviation':
+                return '72%'
+            case 'Hemiparesis':
+                return '81%'
+            case 'Agnosia':
+                return '90%'
+            case 'Aphasia':
+                return '90%'
+        }
+    }
+    updatePercentComplete()
+    document.documentElement.style.setProperty('--percentComplete', `${percentComplete}`)
 
     const renderQuestion = () => {
         switch (componentToRender) {
-            case 1:
-                return <AgeUnder80 nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer}/>
-            case 2:
-                return <AgeOver18 prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer} />
-            case 3:
+            case 'AgeInRange':
+                return <AgeInRange nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer} />
+            case 'LastKnownWell':
                 return <LastKnownWell prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer} />
-            case 4:
+            case 'RecentSurgery':
                 return <RecentSurgery prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer} />
-            case 5:
+            case 'Pregnancy':
                 return <Pregnancy prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer} />
-            case 6:
+            case 'Anticoagulants':
                 return <Anticoagulants prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleTpaAnswer} />
-            case 7:
+            case 'FacialPalsy':
                 return <FacialPalsy prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} />
-            case 8:
+            case 'ArmMotorImpairment':
                 return <ArmMotorImpairment prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} />
-            case 9:
+            case 'LegMotorImpairment':
                 return <LegMotorImpairment prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} />
-            case 10:
+            case 'GazeDeviation':
                 return <GazeDeviation prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} />
-            case 11:
-                return <Hemiparesis prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} />
-            case 12:
-                return <Agnosia prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} />
-            case 13:
-                return <Aphasia prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} />
+            case 'Hemiparesis':
+                return <Hemiparesis prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} completeAssessment={sendToCalcScore} />
+            case 'Agnosia':
+                return <Agnosia prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} completeAssessment={sendToCalcScore} />
+            case 'Aphasia':
+                return <Aphasia prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} completeAssessment={sendToCalcScore} />
         }
     }
 
     // useEffect(() => {},[])
 
     return (
-        <div>
+        <div className="assessment">
             {renderQuestion()}
         </div>
     );

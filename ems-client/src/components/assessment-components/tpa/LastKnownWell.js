@@ -15,11 +15,8 @@ function LastKnownWell(props) {
         const currentDateTime = new Date()
         const currentHour = currentDateTime.getHours()
         const currentMinute = currentDateTime.getMinutes()
-
-        const lkwHourString = lkwTime[0] === '0' ? lkwTime[1] : lkwTime[0]+lkwTime[1]
-        const lkwHour = parseInt(lkwHourString)
-        const lkwMinuteString = lkwTime[4] === '0' ? lkwTime[5] : lkwTime[4]+lkwTime[5]
-        const lkwMinute = parseInt(lkwMinuteString)
+        const lkwHour = parseInt(lkwTime[0]+lkwTime[1])
+        const lkwMinute = parseInt(lkwTime[4]+lkwTime[5])
 
         const generateLkwDateTimeString = () => {
             let lkwDateTimeString
@@ -40,18 +37,18 @@ function LastKnownWell(props) {
 
 
         props.setAnswer('lastKnownWell', lkwDateTimeString)
-        props.nextQuestion(4)
+        props.nextQuestion('RecentSurgery')
 
     }
 
     return (
         <div>
             LastKnownWell
-            <button onClick={() => {props.prevQuestion(2)}}>Back</button>
+            <button onClick={() => {props.prevQuestion('AgeInRange')}}>Back</button>
             <input type="time" name="lkw-time" onChange={(e) => handleAnswer(e)}></input>
             <button onClick={() => submitAnswer()}>Submit</button>
-            <button onClick={() => props.nextQuestion(4)}>More than 24 hours ago</button>
-            <button onClick={() => props.nextQuestion(4)}>Unknown</button>
+            <button onClick={() => props.nextQuestion('RecentSurgery')}>More than 24 hours ago</button>
+            <button onClick={() => props.nextQuestion('RecentSurgery')}>Unknown</button>
         </div>
     );
 
