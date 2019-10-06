@@ -1,12 +1,13 @@
 import React, {useState, useEffect} from 'react'
 import {connect} from 'react-redux'
 
+import '../css/results.css'
 import Recommendations from './recommendation'
-import Maps from './maps'
+import MapView from './map/mapView'
 
 const Results = (props) => {
 
-    const [component, setComponent] = useState('recommendations')
+    const [component, setComponent] = useState('maps')
 
     const triage = {
         tPA: {
@@ -18,15 +19,14 @@ const Results = (props) => {
             recentSurgery: false,
             pregnancy: false,
             anticoagulants: false
-
         },
         race: {
             facialPalsy: 1,
             armMotorImpairment: 1,
             legMotorImpairment: 2,
-            gazeDeviation: 1,
+            gazeDeviation: 2,
             hemiparesis: "left",
-            agnosia: 1,
+            agnosia: 2,
             aphasia: null
         }
     }
@@ -53,7 +53,7 @@ const Results = (props) => {
                 )
             case 'maps':
                 return (
-                    <Maps
+                    <MapView
                         lvo={results.lvo}
                         switchView={() => setComponent('recommendations')}
                     />
