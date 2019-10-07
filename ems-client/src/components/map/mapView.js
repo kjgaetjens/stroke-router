@@ -13,11 +13,6 @@ const MapView = (props) => {
         lng: "",
     })
 
-    const [hospital, setHospital] = useState({
-        lat: "",
-        lng: ""
-    })
-
     const [error, setError] = useState("")
     const [directions, setDirections] = useState({
         active: false,
@@ -25,50 +20,40 @@ const MapView = (props) => {
     })
 
 
+    const [hospitals, setHospitals] = useState([])
 
-    const hospitals = [
-        {
-            name: "Ben Taub Hospital",
-            address: "1504 Ben Taub Loop, Houston, TX 77030",
-            coords: {
-                lat: 29.7109781,
-                lng: -95.3940865
-            }
-        },
-        {
-            name: "Memorial Hermann",
-            address: "6411 Fannin Street, Houston, TX",
-            coords: {            
-                lat: 29.7138126,
-                lng: -95.3963819
-            }
-        },
-        {
-            name: "West Houston Medical Center",
-            address: "12141 Richmond Ave, Houston, TX",
-            coords: {
-                lat: 29.7294486,
-                lng: -95.5947219
-            }
-        },
-        {
-            name: "Memorial Hermann Southwest Hospital",
-            address: "7600 Beechnut St, Houston, TX 77074",
-            coords: {
-                lat: 29.6932967,
-                lng: -95.5222934
-            }
-        }
-    ]
+    const fetchHospitals = async () => {
+        let response = await axios.get(`${env.serverUrl}/hospital`)
+        let hospitals = response.data.hospitals
+        // hospitalCoords(hospitals)
+        setHospitals(hospitals)
+    }
+    
 
-    const hospitalCoords = (list) => {
-        list.forEach(hospital => {
-            let addressString = hospital.address.split(' ').join('+')
-            fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${addressString}&key=${env.apiKey}`)
-            .then(res => res.json())
-            .then(json => {
+    // in case we add more hospitals to DB, takes array of hospitals with address field and patches entries in Mongo with lat/lng
+    const hospitalCoords = async (list) => {
+        await asyncForEach(list, async (hospital) => {
+            let location = await fetchCoords(hospital.address)
+            let response = await axios.patch(`${env.serverUrl}/hospital`, {
+                hospitalId: hospital._id,
+                lat: location.lat,
+                lng: location.lng
             })
+            console.log(response)
         })
+    }
+
+    const asyncForEach = async (array, callback) => {
+        for (let index = 0; index < array.length; index++) {
+          await callback(array[index], index, array);
+        }
+      }
+
+    const fetchCoords = async (address) => {
+        let addressString = address.split(' ').join('+')
+        let response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${addressString}&key=${env.apiKey}`)
+        let json = await response.json()
+        return json.results[0].geometry.location
     }
 
     const grabLocation = () => {
@@ -137,7 +122,7 @@ const MapView = (props) => {
 
     useEffect(() => {
         grabLocation()
-        hospitalCoords(hospitals)
+        fetchHospitals()
     }, [])
 
     return (

@@ -11,7 +11,7 @@ const Map = withScriptjs(withGoogleMap((props) =>
       defaultCenter={props.center}
     >
       <Marker position={props.center} color='blue' />
-      {props.hospitals.map((hospital, i) => <Marker key={i} position={hospital.coords} onClick={() => props.getDirections(hospital.coords)} />)}
+      {props.hospitals.map((hospital) => <Marker key={hospital._id} position={hospital.coords} onClick={() => props.getDirections(hospital.coords)} />)}
       {props.directionsOn ? <DirectionsRenderer directions={props.directions} /> : null}
     </GoogleMap>
 ))
