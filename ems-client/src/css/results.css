@@ -1,0 +1,60 @@
+.pageComponent {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pageComponent.maps {
+    align-items: flex-start;
+}
+
+.score {
+    font-size: 20vw;
+}
+
+.recommendationText {
+    width: 70%;
+    text-align: center;
+}
+
+.submitButton {
+    border: 2px solid white;
+    border-radius: 4px;
+    background-color: navy;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.mapAndHospitalsDiv {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.mapDiv {
+    border: 4px solid red;
+    height: calc(66vw + 8px);
+    max-height: 90vh;
+    width: calc(66vw + 8px);
+    flex: 2;
+}
+
+.hospitalsContainer {
+    border: 4px solid red;
+    flex: 1;
+}
+
+.hospitalDiv {
+    width: 100%;
+    height: 10vh;
+    border-bottom: 1px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.loadingElement {height: 100%;}
+.mapElement {height: 100%;}
+.containerElement {height: 66vw;  max-height: 90vh; width: 66vw;}
