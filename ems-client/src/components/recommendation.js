@@ -78,11 +78,18 @@ const Recommendations = (props) => {
 
 
     return (
-        <div className="pageComponent">
-            <span className="score" style={scoreColor()}>{props.results.race}</span>
-            <p className="recommendationText">{displayRecommendation()}</p>
-            <button className="submitButton" onClick={props.switchView}>Show Nearby Centers</button>
+        <div className="recommendation-div">
+            <div className="pageComponent">
+                <div className="scoreDiv">
+                    <span className="score" style={scoreColor()}>{props.results.race}</span>
+                    <p className="recommendationText">{displayRecommendation()}</p>
+                </div>
+                <div>
+                    <button className="submitButton" onClick={props.switchView}>Show Nearby Centers</button>
+                </div>
+            </div>
         </div>
+
     )
 }
 
