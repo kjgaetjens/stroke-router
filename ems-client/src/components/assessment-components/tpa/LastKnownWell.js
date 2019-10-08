@@ -3,6 +3,20 @@ import React,{useState} from 'react';
 function LastKnownWell(props) {
 
     const [lkwTime, setLkwTime] = useState('')
+    const [infoBox, setInfoBox] = useState(false)
+
+    
+    const displayInfo = () => {
+        infoBox ? setInfoBox(false) : setInfoBox(true)
+    }
+
+    const createInfoBox = () => {
+        return (
+            <div className="info-text">
+                this is help text for this question. boiler plate boiler plate boiler plate boiler plate boiler plate boiler plate
+            </div>
+        )
+    }
 
     const handleAnswer = (e) => {
 
@@ -41,15 +55,31 @@ function LastKnownWell(props) {
 
     }
 
+
+
     return (
-        <div>
-            LastKnownWell
-            <button onClick={() => {props.prevQuestion('AgeInRange')}}>Back</button>
-            <input type="time" name="lkw-time" onChange={(e) => handleAnswer(e)}></input>
-            <button onClick={() => submitAnswer()}>Submit</button>
-            <button onClick={() => props.nextQuestion('RecentSurgery')}>More than 24 hours ago</button>
-            <button onClick={() => props.nextQuestion('RecentSurgery')}>Unknown</button>
+        <React.Fragment>
+        <div className="assessment-header">
+            <button onClick={() => {props.prevQuestion('AgeInRange')}}>{`< Back`}</button>
+            <h4>tPA Exclusion Assessment</h4>
+            <div className="progress-border">
+                <div className="progress-fill"></div>
+            </div>
         </div>
+
+        <div className="assessment-container">
+            <div className="question-container">
+                <span className="question-text">What is the last time the patient was seen well? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span><span className="info-icon-span"></span>
+                {infoBox ? createInfoBox() : null}
+            </div>
+            <div className="answer-container">
+                <input type="time" name="lkw-time" onChange={(e) => handleAnswer(e)}></input>
+                <button onClick={() => submitAnswer()}>Submit</button>
+                <button onClick={() => props.nextQuestion('RecentSurgery')}>More than 24 hours ago</button>
+                <button onClick={() => props.nextQuestion('RecentSurgery')}>Unknown</button>
+            </div>
+        </div>
+        </React.Fragment>
     );
 
 }

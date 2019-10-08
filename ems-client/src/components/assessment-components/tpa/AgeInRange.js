@@ -4,10 +4,6 @@ function AgeInRange(props) {
 
     const [infoBox, setInfoBox] = useState(false)
 
-    const submitAnswer = (answer) => {
-        props.setAnswer('ageInRange', answer)
-        props.nextQuestion('LastKnownWell')
-    }
 
     const displayInfo = () => {
         infoBox ? setInfoBox(false) : setInfoBox(true)
@@ -21,10 +17,15 @@ function AgeInRange(props) {
         )
     }
 
+    const submitAnswer = (answer) => {
+        props.setAnswer('ageInRange', answer)
+        props.nextQuestion('LastKnownWell')
+    }
+
+
     return (
         <React.Fragment>
         <div className="assessment-header">
-            {/* <span>{'< Back'}</span> */}
             <h4>tPA Exclusion Assessment</h4>
             <div className="progress-border">
                 <div className="progress-fill"></div>
