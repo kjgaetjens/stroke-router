@@ -11,7 +11,7 @@ function RecentSurgery(props) {
     const createInfoBox = () => {
         return (
             <div className="info-text">
-                this is help text for this question. boiler plate boiler plate boiler plate boiler plate boiler plate boiler plate
+                Includes major surgeries, such as cardiac, neuro, or any intravenous surgical procedure
             </div>
         )
     }

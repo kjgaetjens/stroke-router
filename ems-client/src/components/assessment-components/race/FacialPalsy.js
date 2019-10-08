@@ -11,7 +11,7 @@ function FacialPalsy(props) {
     const createInfoBox = () => {
         return (
             <div className="info-text">
-                this is help text for this question. boiler plate boiler plate boiler plate boiler plate boiler plate boiler plate
+                Ask the patient to smile or show their teeth, and note if one side of their face responds less - or doesn't respond at all
             </div>
         )
     }
@@ -33,7 +33,7 @@ function FacialPalsy(props) {
 
         <div className="assessment-container">
             <div className="question-container">
-                <span className="question-text">Is the patient experiencing facial palsy? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span><span className="info-icon-span"></span>
+                <span className="question-text">Is the patient experiencing facial palsy? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span>
                 {infoBox ? createInfoBox() : null}
             </div>
             <div className="answer-container">

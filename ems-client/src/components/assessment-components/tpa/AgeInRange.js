@@ -12,10 +12,11 @@ function AgeInRange(props) {
     const createInfoBox = () => {
         return (
             <div className="info-text">
-                this is help text for this question. boiler plate boiler plate boiler plate boiler plate boiler plate boiler plate
+                
             </div>
         )
     }
+    // <i className="fas fa-info-circle" onClick={() => displayInfo()}></i>
 
     const submitAnswer = (answer) => {
         props.setAnswer('ageInRange', answer)
@@ -34,8 +35,8 @@ function AgeInRange(props) {
 
         <div className="assessment-container">
             <div className="question-container">
-                <span className="question-text">Is the patient over the age of 18 and under the age of 80? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span><span className="info-icon-span"></span>
-                {infoBox ? createInfoBox() : null}
+                <span className="question-text">Is the patient over the age of 18 and under the age of 80? </span>
+                {/* {infoBox ? createInfoBox() : null} */}
             </div>
             <div className="answer-container">
                 <button onClick={() => submitAnswer(true)}>Yes</button>

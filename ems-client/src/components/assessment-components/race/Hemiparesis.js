@@ -11,7 +11,7 @@ function Hemiparesis (props) {
     const createInfoBox = () => {
         return (
             <div className="info-text">
-                this is help text for this question. boiler plate boiler plate boiler plate boiler plate boiler plate boiler plate
+                Patient shows clear lateral weakness in arms, legs, and/or facial muscles. This response will code into either Agnosia or Aphasia assessment depending on affected side.
             </div>
         )
     }
@@ -43,13 +43,13 @@ function Hemiparesis (props) {
 
         <div className="assessment-container">
             <div className="question-container">
-                <span className="question-text"> Is patient experiencing hemiparesis? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span><span className="info-icon-span"></span>
+                <span className="question-text"> Does patient have definite hemiparesis? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span><span className="info-icon-span"></span>
                 {infoBox ? createInfoBox() : null}
             </div>
             <div className="answer-container">
                 <button onClick={() => submitAnswer([false, null])}>Absent</button>
-                <button onClick={() => submitAnswer([true, 'left'])}>Left Side</button>
-                <button onClick={() => submitAnswer([true, 'right'])}>Right Side</button>
+                <button onClick={() => submitAnswer([true, 'left'])}>Present: Left Side</button>
+                <button onClick={() => submitAnswer([true, 'right'])}>Present: Right Side</button>
             </div>
         </div>
         </React.Fragment>

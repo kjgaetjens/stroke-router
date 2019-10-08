@@ -11,7 +11,7 @@ function GazeDeviation(props) {
     const createInfoBox = () => {
         return (
             <div className="info-text">
-                this is help text for this question. boiler plate boiler plate boiler plate boiler plate boiler plate boiler plate
+                <b>Absent/mild</b> - Eyes move freely, or with slight resistance from side to side. <b>Present</b> - Eyes show clear preference to one side
             </div>
         )
     }
@@ -33,7 +33,7 @@ function GazeDeviation(props) {
 
         <div className="assessment-container">
             <div className="question-container">
-                <span className="question-text">Is the patient experiencing gaze deviation? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span><span className="info-icon-span"></span>
+                <span className="question-text">Is the patient experiencing gaze deviation? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span>
                 {infoBox ? createInfoBox() : null}
             </div>
             <div className="answer-container">
