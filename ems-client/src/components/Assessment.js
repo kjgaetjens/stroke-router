@@ -61,21 +61,26 @@ function Assessment(props) {
     }
 
     const sendToCalcScore = () => {
-        const currentDateTime = new Date()
+        if (tpa.lastKnownWell) {
+            const currentDateTime = new Date()
 
-        let lastKnownWell = tpa.lastKnownWell
-        let lkwYear = parseInt(lastKnownWell.slice(0,4))
-        let lkwMonth = parseInt(lastKnownWell.slice(5,7)) - 1
-        let lkwDay = parseInt(lastKnownWell.slice(8,10))
-        let lkwHours = parseInt(lastKnownWell.slice(11,13))
-        let lkwMinutes = parseInt(lastKnownWell.slice(14,16))
-        let lkwSeconds = parseInt(lastKnownWell.slice(17,20))
-        const lkwDateTime = new Date(lkwYear, lkwMonth, lkwDay, lkwHours, lkwMinutes, lkwSeconds)
+            let lastKnownWell = tpa.lastKnownWell
+            let lkwYear = parseInt(lastKnownWell.slice(0,4))
+            let lkwMonth = parseInt(lastKnownWell.slice(5,7)) - 1
+            let lkwDay = parseInt(lastKnownWell.slice(8,10))
+            let lkwHours = parseInt(lastKnownWell.slice(11,13))
+            let lkwMinutes = parseInt(lastKnownWell.slice(14,16))
+            let lkwSeconds = parseInt(lastKnownWell.slice(17,20))
+            const lkwDateTime = new Date(lkwYear, lkwMonth, lkwDay, lkwHours, lkwMinutes, lkwSeconds)
+    
+            const timeSinceLkw = currentDateTime - lkwDateTime
+            const hoursSinceLkw = Math.trunc(timeSinceLkw/3600000)
+    
+            props.history.push('/recommendation', {tpa: {...tpa, timeSinceLkw: hoursSinceLkw}, race: race})
+        } else {
+            props.history.push('/recommendation', {tpa: tpa, race: race})
+        }
 
-        const timeSinceLkw = currentDateTime - lkwDateTime
-        const hoursSinceLkw = Math.trunc(timeSinceLkw/3600000)
-
-        props.history.push('/recommendation', {tpa: {...tpa, timeSinceLkw: hoursSinceLkw}, race: race})
     }
 
     let percentComplete = '0%'

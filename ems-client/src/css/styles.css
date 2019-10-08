@@ -105,6 +105,11 @@ body {
     font-size: 1.2em;
 }
 
+#disabled-button {
+    background-color: lightgrey;
+    color: darkgrey;
+}
+
 .answer-container input {
     background-color: white;
     color: black;

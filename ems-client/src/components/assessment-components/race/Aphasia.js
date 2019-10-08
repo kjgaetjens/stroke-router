@@ -16,7 +16,7 @@ function Aphasia(props) {
         )
     }
 
-    const goBack = (answer) => {
+    const goBack = () => {
         props.setAnswer('aphasia', null)
         props.prevQuestion('Hemiparesis')
     }
