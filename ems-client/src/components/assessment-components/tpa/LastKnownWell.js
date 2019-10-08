@@ -55,7 +55,12 @@ function LastKnownWell(props) {
 
     }
 
+    const submitNullAnswer = () => {
 
+        props.setAnswer('lastKnownWell', null)
+        props.nextQuestion('RecentSurgery')
+
+    }
 
     return (
         <React.Fragment>
@@ -74,7 +79,7 @@ function LastKnownWell(props) {
             </div>
             <div className="answer-container">
                 <input type="time" name="lkw-time" onChange={(e) => handleAnswer(e)}></input>
-                <button onClick={() => submitAnswer()}>Submit</button>
+                {lkwTime == '' ? <button id="disabled-button">Submit</button> : <button onClick={() => submitAnswer()}>Submit</button>}
                 <button onClick={() => props.nextQuestion('RecentSurgery')}>More than 24 hours ago</button>
                 <button onClick={() => props.nextQuestion('RecentSurgery')}>Unknown</button>
             </div>
