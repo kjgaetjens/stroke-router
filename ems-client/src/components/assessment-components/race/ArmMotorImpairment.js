@@ -11,7 +11,7 @@ function ArmMotorImpairment(props) {
     const createInfoBox = () => {
         return (
             <div className="info-text">
-                this is help text for this question. boiler plate boiler plate boiler plate boiler plate boiler plate boiler plate
+                Extend arm 90deg if sitting, 45deg if prone. Check <b>severe</b> if there is no effort against gravity, <b>moderate</b> if arm drifts down within 10 seconds.
             </div>
         )
     }
@@ -34,7 +34,7 @@ function ArmMotorImpairment(props) {
 
         <div className="assessment-container">
             <div className="question-container">
-                <span className="question-text">Is the patient experiencing any arm weakness?<i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span><span className="info-icon-span"></span>
+                <span className="question-text">Is the patient experiencing any arm weakness?<i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span>
                 {infoBox ? createInfoBox() : null}
             </div>
             <div className="answer-container">

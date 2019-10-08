@@ -11,7 +11,7 @@ function Aphasia(props) {
     const createInfoBox = () => {
         return (
             <div className="info-text">
-                this is help text for this question. boiler plate boiler plate boiler plate boiler plate boiler plate boiler plate
+                Does the patient understand commands? Ask the patient to close their eyes, and make a fist.<br/><b>Moderate:</b> Patient performs 1 task correctly.<br /><b>Severe:</b> Patient performs neither task correctly.
             </div>
         )
     }
@@ -37,7 +37,7 @@ function Aphasia(props) {
 
         <div className="assessment-container">
             <div className="question-container">
-                <span className="question-text">Is the patient experiencing Aphasia? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span><span className="info-icon-span"></span>
+                <span className="question-text">Is the patient experiencing Aphasia? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span>
                 {infoBox ? createInfoBox() : null}
             </div>
             <div className="answer-container">
