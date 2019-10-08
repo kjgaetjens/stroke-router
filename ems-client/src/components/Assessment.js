@@ -78,11 +78,11 @@ function Assessment(props) {
         props.history.push('/recommendation', {tpa: {...tpa, timeSinceLkw: hoursSinceLkw}, race: race})
     }
 
-    let percentComplete = '5%'
+    let percentComplete = '0%'
     const updatePercentComplete = () => {
         switch (componentToRender) {
             case 'AgeInRange':
-                return '5%'
+                return '0%'
             case 'LastKnownWell':
                 return '9%'
             case 'RecentSurgery':
@@ -107,7 +107,7 @@ function Assessment(props) {
                 return '90%'
         }
     }
-    updatePercentComplete()
+    percentComplete = updatePercentComplete()
     document.documentElement.style.setProperty('--percentComplete', `${percentComplete}`)
 
     const renderQuestion = () => {
