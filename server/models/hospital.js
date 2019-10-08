@@ -11,11 +11,11 @@ const hospitalSchema = new mongoose.Schema({
     name: String,
     address: String,
     coords: coordsSchema,
-    CSC: Boolean,
-    EVMT: Boolean,
-    PSC: Boolean,
-    TPA: Boolean,
-    TSC: Boolean
+    CSC: String,
+    EVMT: String,
+    PSC: String,
+    TPA: String,
+    TSC: String
 })
 
 const Hospital = mongoose.model('Hospital', hospitalSchema)

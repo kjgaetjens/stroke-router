@@ -25,9 +25,31 @@ const MapView = (props) => {
     const fetchHospitals = async () => {
         let response = await axios.get(`${env.serverUrl}/hospital`)
         let hospitals = response.data.hospitals
-        // hospitalCoords(hospitals)
         setHospitals(hospitals)
+        // processHospitals(hospitals)
     }
+
+    // const processHospitals = async (list) => {
+    //     if (props.google) {
+    //         let processedHospitals = await Promise.all(list.map(hospital => getTravelInfo(hospital.coords)))
+    //     }
+    // }
+
+    // const getTravelInfo = async (coords) => {
+    //     console.log('here')
+    //     let directionsService = new props.google.maps.DirectionsService()
+    
+    //     directionsService.route({
+    //       origin: location,
+    //       destination: coords,
+    //       travelMode: props.google.maps.TravelMode.DRIVING
+    //     },
+    //     (result, status) => {
+    //         if (status === props.google.maps.DirectionsStatus.OK) {
+    //             console.log(result)
+    //         }
+    //     })
+    // }
     
 
     // in case we add more hospitals to DB, takes array of hospitals with address field and patches entries in Mongo with lat/lng
@@ -81,7 +103,8 @@ const MapView = (props) => {
             (result, status) => {
               status === props.google.maps.DirectionsStatus.OK ? setDirections({active: true, route: result}) : setError("Error fetching directions")
             })
-      }
+    }
+
 
     const renderMap = () => {
         if (location.lat !== "" && location.lng !== "") {
@@ -105,15 +128,31 @@ const MapView = (props) => {
         }
     }
 
+    const renderAttributes = (hospital) => {
+        return (
+            <div className="attributesDiv">
+                <div className="travelInfoDiv">
+
+                </div>
+                <div className="certificationsDiv">
+                    {hospital.CSC === "TRUE" ? <span className="attribute CSC">Comprehensive Stroke Center</    span> : null}
+                    {hospital.EVMT === "TRUE" ? <span className="attribute EVMT">Endovascular   Thrombectomy-Capable</span> : null}
+                    {hospital.PSC === "TRUE" && hospital.CSC === "FALSE" ? <span className="attribute   PSC">Primary Stroke Center</span> : null}
+                    {hospital.TPA === "TRUE" ? <span className="attribute TPA">tPA Available</span> : null}
+                </div>
+            </div>
+        )
+    }
+
     const renderHospitals = () => {
         // hospital list based on proximity and matched with lvo +/-
         return (
             <div className="hospitalsContainer">
-                {hospitals.map((hospital, i) => 
-                    <div key={i} className="hospitalDiv">
+                {hospitals.map((hospital) => 
+                    <div key={hospital._id} className="hospitalDiv">
                         <span className="hospitalName">{hospital.name}</span>
                         <span className="hospitalAddress">{hospital.address}</span>
-                        <div className="specialties"></div>
+                        {renderAttributes(hospital)}
                     </div>
                 )}
             </div>

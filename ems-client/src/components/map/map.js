@@ -10,8 +10,8 @@ const Map = withScriptjs(withGoogleMap((props) =>
       defaultZoom={11}
       defaultCenter={props.center}
     >
-      <Marker position={props.center} color='blue' />
-      {props.hospitals.map((hospital) => <Marker key={hospital._id} position={hospital.coords} onClick={() => props.getDirections(hospital.coords)} />)}
+      <Marker position={props.center} />
+      {props.hospitals.map((hospital) => <Marker key={hospital._id} icon={{url: `http://maps.google.com/mapfiles/ms/icons/hospitals.png`}} position={hospital.coords} onClick={() => props.getDirections(hospital.coords)} />)}
       {props.directionsOn ? <DirectionsRenderer directions={props.directions} /> : null}
     </GoogleMap>
 ))
