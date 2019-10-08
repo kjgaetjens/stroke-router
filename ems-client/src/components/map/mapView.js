@@ -19,13 +19,14 @@ const MapView = (props) => {
         route: {}
     })
 
-
     const [hospitals, setHospitals] = useState([])
 
-    const fetchHospitals = async () => {
-        let response = await axios.get(`${env.serverUrl}/hospital`)
-        let hospitals = response.data.hospitals
-        setHospitals(hospitals)
+    const fetchHospitals = () => {
+        axios.get(`${env.serverUrl}/hospital`)
+        .then(response => {
+            let hospitals = response.data.hospitals
+            setHospitals(hospitals)
+        })
         // processHospitals(hospitals)
     }
 
@@ -53,30 +54,30 @@ const MapView = (props) => {
     
 
     // in case we add more hospitals to DB, takes array of hospitals with address field and patches entries in Mongo with lat/lng
-    const hospitalCoords = async (list) => {
-        await asyncForEach(list, async (hospital) => {
-            let location = await fetchCoords(hospital.address)
-            let response = await axios.patch(`${env.serverUrl}/hospital`, {
-                hospitalId: hospital._id,
-                lat: location.lat,
-                lng: location.lng
-            })
-            console.log(response)
-        })
-    }
+    // const hospitalCoords = async (list) => {
+    //     await asyncForEach(list, async (hospital) => {
+    //         let location = await fetchCoords(hospital.address)
+    //         let response = await axios.patch(`${env.serverUrl}/hospital`, {
+    //             hospitalId: hospital._id,
+    //             lat: location.lat,
+    //             lng: location.lng
+    //         })
+    //         console.log(response)
+    //     })
+    // }
 
-    const asyncForEach = async (array, callback) => {
-        for (let index = 0; index < array.length; index++) {
-          await callback(array[index], index, array);
-        }
-      }
+    // const asyncForEach = async (array, callback) => {
+    //     for (let index = 0; index < array.length; index++) {
+    //       await callback(array[index], index, array);
+    //     }
+    //   }
 
-    const fetchCoords = async (address) => {
-        let addressString = address.split(' ').join('+')
-        let response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${addressString}&key=${env.apiKey}`)
-        let json = await response.json()
-        return json.results[0].geometry.location
-    }
+    // const fetchCoords = async (address) => {
+    //     let addressString = address.split(' ').join('+')
+    //     let response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${addressString}&key=${env.apiKey}`)
+    //     let json = await response.json()
+    //     return json.results[0].geometry.location
+    // }
 
     const grabLocation = () => {
         if (navigator.geolocation) {

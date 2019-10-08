@@ -7,7 +7,7 @@ import MapView from './map/mapView'
 
 const Results = (props) => {
 
-    const [component, setComponent] = useState('maps')
+    const [component, setComponent] = useState('recommendations')
 
     const triage = {
         tPA: {
