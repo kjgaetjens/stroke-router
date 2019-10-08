@@ -11,7 +11,7 @@ function Agnosia(props) {
     const createInfoBox = () => {
         return (
             <div className="info-text">
-                this is help text for this question. boiler plate boiler plate boiler plate boiler plate boiler plate boiler plate
+                Refer to the patient's weak arm, and ask "Whose arm is this?" Ask the patient to move that arm.<br /><b>Moderate:</b> Patient performs 1 task correctly.<br /><b>Severe:</b> Patient performs neither task correctly
             </div>
         )
     }
@@ -37,13 +37,13 @@ function Agnosia(props) {
 
         <div className="assessment-container">
             <div className="question-container">
-                <span className="question-text">Is the patient experiencing Agnosia/Neglect? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span><span className="info-icon-span"></span>
+                <span className="question-text">Is the patient experiencing Agnosia/Neglect? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span>
                 {infoBox ? createInfoBox() : null}
             </div>
             <div className="answer-container">
-                <button onClick={() => submitAnswer(0)}>Patient recognizes his/her arm and the impairment</button>
-                <button onClick={() => submitAnswer(1)}>Does not recognize his/her arm or the impairment</button>
-                <button onClick={() => submitAnswer(2)}>Does not recognize his/her arm nor the impairment</button>
+                <button onClick={() => submitAnswer(0)}>Absent</button>
+                <button onClick={() => submitAnswer(1)}>Moderate</button>
+                <button onClick={() => submitAnswer(2)}>Severe</button>
             </div>
         </div>
         </React.Fragment>

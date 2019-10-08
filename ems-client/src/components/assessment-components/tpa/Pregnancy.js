@@ -33,8 +33,8 @@ function Pregnancy(props) {
 
         <div className="assessment-container">
             <div className="question-container">
-                <span className="question-text">Is the patient pregnant? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span><span className="info-icon-span"></span>
-                {infoBox ? createInfoBox() : null}
+                <span className="question-text">Is the patient pregnant? </span>
+                {/* {infoBox ? createInfoBox() : null} */}
             </div>
             <div className="answer-container">
                 <button onClick={() => submitAnswer(true)}>Yes</button>

@@ -11,7 +11,7 @@ function Anticoagulants(props) {
     const createInfoBox = () => {
         return (
             <div className="info-text">
-                this is help text for this question. boiler plate boiler plate boiler plate boiler plate boiler plate boiler plate
+                Common types include <b>heparin</b>, <b>warfarin</b> (Coumadin), <b>rivaroxaban</b> (Xarelto), <b>dabigatran</b> (Pradaxa) & <b>apixaban</b> (Eliquis)
             </div>
         )
     }
@@ -33,7 +33,7 @@ function Anticoagulants(props) {
 
         <div className="assessment-container">
             <div className="question-container">
-                <span className="question-text">Is the patient on anticoagulants? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span><span className="info-icon-span"></span>
+                <span className="question-text">Is the patient on anticoagulants? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span>
                 {infoBox ? createInfoBox() : null}
             </div>
             <div className="answer-container">

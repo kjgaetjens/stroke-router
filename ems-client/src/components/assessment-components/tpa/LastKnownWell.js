@@ -13,7 +13,7 @@ function LastKnownWell(props) {
     const createInfoBox = () => {
         return (
             <div className="info-text">
-                this is help text for this question. boiler plate boiler plate boiler plate boiler plate boiler plate boiler plate
+                Last time the patient was seen without stroke-like symptoms, at baseline level of health.
             </div>
         )
     }
@@ -74,7 +74,7 @@ function LastKnownWell(props) {
 
         <div className="assessment-container">
             <div className="question-container">
-                <span className="question-text">What is the last time the patient was seen well? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span><span className="info-icon-span"></span>
+                <span className="question-text">What is the last time the patient was seen well? <i className="fas fa-info-circle" onClick={() => displayInfo()}></i></span>
                 {infoBox ? createInfoBox() : null}
             </div>
             <div className="answer-container">
