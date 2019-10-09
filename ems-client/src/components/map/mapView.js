@@ -2,15 +2,18 @@ import React, {useState, useEffect} from 'react'
 import Map from './map'
 import GoogleApiComponent from '../../utils/GoogleApiComponent'
 import GoogleApi from '../../utils/GoogleApiComponent'
-import {connect} from 'react-redux'
+import Scrollable from 'hide-scrollbar-react'
+import {HospitalCard} from './hospitalCard'
 import * as env from '../../env'
 import axios from 'axios'
 
 const MapView = (props) => {
 
     const [location, setLocation] = useState({
-        lat: "",
-        lng: "",
+        lat: 0,
+        lng: 0,
+        ready: false,
+        hospitalsFetched: false
     })
 
     const [error, setError] = useState("")
@@ -19,38 +22,49 @@ const MapView = (props) => {
         route: {}
     })
 
+    const [activeHospital, setActiveHospital] = useState({
+        active: false,
+        hospital: {}
+    })
+
     const [hospitals, setHospitals] = useState([])
 
     const fetchHospitals = () => {
         axios.get(`${env.serverUrl}/hospital`)
         .then(response => {
             let hospitals = response.data.hospitals
+
+            hospitals = sortHospitals(hospitals)
+            if (props.lvo) {
+                hospitals = hospitals.filter(hospital => hospital.CSC === "TRUE")
+            }
             setHospitals(hospitals)
+            setLocation({...location, hospitalsFetched: true})
         })
-        // processHospitals(hospitals)
     }
 
-    // const processHospitals = async (list) => {
-    //     if (props.google) {
-    //         let processedHospitals = await Promise.all(list.map(hospital => getTravelInfo(hospital.coords)))
-    //     }
-    // }
+    const sortHospitals = (hospitals) => {
+        hospitals.sort((a, b) => {
+            let u = {
+                lat: location.lat * Math.PI / 180,
+                lng: location.lng * Math.PI / 180
+            }
 
-    // const getTravelInfo = async (coords) => {
-    //     console.log('here')
-    //     let directionsService = new props.google.maps.DirectionsService()
-    
-    //     directionsService.route({
-    //       origin: location,
-    //       destination: coords,
-    //       travelMode: props.google.maps.TravelMode.DRIVING
-    //     },
-    //     (result, status) => {
-    //         if (status === props.google.maps.DirectionsStatus.OK) {
-    //             console.log(result)
-    //         }
-    //     })
-    // }
+                a.lat = a.coords.lat * Math.PI / 180
+                a.lng = a.coords.lng * Math.PI / 180
+
+                b.lat = b.coords.lat * Math.PI / 180
+                b.lng = b.coords.lng * Math.PI / 180
+
+                let distA = Math.acos(Math.sin(u.lat) * Math.sin(a.lat) + Math.cos(u.lat) * Math.cos(a.lat) * Math.cos(a.lng - u.lng)) * 3958.76
+
+                let distB = Math.acos(Math.sin(u.lat) * Math.sin(b.lat) + Math.cos(u.lat) * Math.cos(b.lat) * Math.cos(b.lng - u.lng)) * 3958.76
+
+                return distA - distB
+        })
+
+        return hospitals
+    }
     
 
     // in case we add more hospitals to DB, takes array of hospitals with address field and patches entries in Mongo with lat/lng
@@ -81,18 +95,20 @@ const MapView = (props) => {
 
     const grabLocation = () => {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(processPosition)
+            return new Promise((resolve, reject) => navigator.geolocation.getCurrentPosition(resolve, reject))
         }
     }
 
     const processPosition = (position) => {
         setLocation({
             lat: position.coords.latitude,
-            lng: position.coords.longitude
+            lng: position.coords.longitude,
+            ready: true,
+            hospitalsFetched: false
         })
     }
 
-    const getDirections = (destination) => {
+    const getDirections = (origin, destination) => {
         //destination object w/ lat: lng:
             let directionsService = new props.google.maps.DirectionsService()
     
@@ -129,47 +145,75 @@ const MapView = (props) => {
         }
     }
 
-    const renderAttributes = (hospital) => {
+    const renderHospitals = () => {
+        // hospital list based on proximity and matched with lvo +/-
         return (
+            <div className="outerHospitalsContainer">
+                {activeHospital.active ? renderActiveHospital(activeHospital.hospital) : null}
+                <Scrollable>
+                <div className="hospitalsContainer">
+                    {hospitals.map((hospital, i) => {
+                        return (
+                            <HospitalCard
+                                counter={i}
+                                google={props.google}
+                                hospital={hospital}
+                                key={hospital._id}
+                                location={location}
+                                getDirections={getDirections}
+                                setActive={setActiveHospital}
+                            />
+                        )
+                    })}
+                </div>
+                </Scrollable>
+            </div>
+        )
+    }
+
+    const renderActiveHospital = (hospital) => {
+        return (
+            <div key={hospital._id} className="hospitalDiv active">
+            <div className="infoDiv">
+                <span className="hospitalName">{hospital.name}</span>
+                <span className="hospitalAddress">{hospital.address}</span>
+            </div>
             <div className="attributesDiv">
                 <div className="travelInfoDiv">
-
+                    <span>{hospital.distance}</span>
+                    <span>{hospital.duration}</span>
                 </div>
                 <div className="certificationsDiv">
                     {hospital.CSC === "TRUE" ? <span className="attribute CSC">Comprehensive Stroke Center</    span> : null}
-                    {hospital.EVMT === "TRUE" ? <span className="attribute EVMT">Endovascular   Thrombectomy-Capable</span> : null}
+                    {hospital.EVMT === "TRUE" ? <span className="attribute EVMT">Thrombectomy-Capable</span> : null}
                     {hospital.PSC === "TRUE" && hospital.CSC === "FALSE" ? <span className="attribute   PSC">Primary Stroke Center</span> : null}
                     {hospital.TPA === "TRUE" ? <span className="attribute TPA">tPA Available</span> : null}
                 </div>
             </div>
+        </div>
         )
     }
 
-    const renderHospitals = () => {
-        // hospital list based on proximity and matched with lvo +/-
-        return (
-            <div className="hospitalsContainer">
-                {hospitals.map((hospital) => 
-                    <div key={hospital._id} className="hospitalDiv">
-                        <span className="hospitalName">{hospital.name}</span>
-                        <span className="hospitalAddress">{hospital.address}</span>
-                        {renderAttributes(hospital)}
-                    </div>
-                )}
-            </div>
-        )
+
+    if (location.ready && !location.hospitalsFetched) {
+        fetchHospitals()
     }
 
     useEffect(() => {
-        grabLocation()
-        fetchHospitals()
+
+        const locateUser = async () => {
+            let position = await grabLocation()
+            processPosition(position)
+        }
+        
+        locateUser()
     }, [])
 
     return (
         <div className="pageComponent maps">
             <button className="submitButton" onClick={props.switchView}>Back to Recommendation</button>
             <div className="mapAndHospitalsDiv">
-                {renderMap()}
+                {location.lat !== 0 ? renderMap() : null}
                 {renderHospitals()}
             </div>
         </div>

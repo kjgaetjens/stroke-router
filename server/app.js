@@ -37,6 +37,10 @@ mongoose.connect(`mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@stroke-route
 })
 
 app.get('/hospital', (req,res) => {
+
+    let userLat = req.query.lat
+    let userLng = req.query.lng
+    
     hospitalModels.Hospital.find({}, (error, hospitals) => {
         error ? res.json({error: error}) : res.json({hospitals: hospitals})
     })
