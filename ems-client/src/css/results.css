@@ -9,8 +9,8 @@
 }
 
 .pageComponent {
-    height: 76vh;
-    width: 80%;
+    height: 100%;
+    width: 100%;
     background-color: white;
     display: flex;
     flex-direction: column;
@@ -65,32 +65,76 @@
     flex: 2;
 }
 
-.hospitalsContainer {
+.outerHospitalsContainer {
     height: 66vw;
     max-height: calc(90vh + 10px);
+}
+
+.hospitalsContainer {
+    height: 100%;
+    /* max-height: calc(90vh + 10px); */
     overflow-y: scroll;
     border: 4px solid rgb(28,108,185);
     flex: 1;
 }
 
+
+
 .hospitalDiv {
-    width: calc(100% - 10px);
+    width: 100%;
     padding: 5px;
-    height: 15vh;
+    height: 18vh;
+    outline: none;
+    border: none;
     border-bottom: 1px solid rgb(28,108,185);
     background: linear-gradient(white, rgba(28, 109, 185, 0.356));
     display: flex;
     flex-direction: column;
+    text-align: left;
+}
+
+.hospitalDiv.active {
+    background: none;
+    background-color: rgb(28,108,185);
+    color: white;
+}
+
+.infoDiv {
+    width: calc(100% - 10px);
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 
 .hospitalName {
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 1em;
+}
+
+.hospitalAddress {
+    width: 100%;
+    margin-top: 3px;
+    font-size: 0.8em;
 }
 
 .attributesDiv {
+    margin: 5px;
+    margin-top: auto;
+    width: calc(100% - 10px);
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+}
+
+.travelInfoDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.travelInfoDiv span {
+    font-size: 0.8em;
 }
 
 .certificationsDiv {
@@ -99,6 +143,33 @@
     align-items: flex-end;
 }
 
+.certificationsDiv span {
+    font-size: 0.6em;
+}
+
+.attribute {
+    color: white;
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.CSC {
+    background-color: #eb3b5a;
+}
+
+.EVMT {
+    background-color: #3867d6;
+}
+
+.PSC {
+    background-color: #fa8231;
+}
+
+.TPA {
+    background-color: #8854d0;
+}
+
+
 .loadingElement {height: 100%;}
 .mapElement {height: 100%;}
-.containerElement {height: 66vw;  max-height: calc(90vh + 10px); width: 66vw;}
+.containerElement {height: 66vw;  max-height: calc(90vh + 10px); width: 100%;}

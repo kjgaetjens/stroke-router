@@ -7,7 +7,7 @@ import './css/styles.css'
 import * as serviceWorker from './serviceWorker';
 
 import App from './App'
-import Login from './components/assessment-components/login'
+import Login from './components/login'
 import Assessment from './components/Assessment'
 import Results from './components/results'
 

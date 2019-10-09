@@ -1,11 +1,11 @@
 import React, {useState} from 'react'
 import {connect} from 'react-redux'
 import {Redirect} from 'react-router-dom'
-import * as actionCreators from '../../store/actions/actionCreators'
-import '../../css/login.css'
+import * as actionCreators from '../store/actions/actionCreators'
+import '../css/login.css'
 import axios from 'axios'
-import * as env from '../../env'
-import { setAuthenticationHeader } from '../../utils/authenticate';
+import * as env from '../env'
+import { setAuthenticationHeader } from '../utils/authenticate';
 
 const Login = (props) => {
 
