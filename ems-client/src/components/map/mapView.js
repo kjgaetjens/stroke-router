@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Map from './map'
 import GoogleApiComponent from '../../utils/GoogleApiComponent'
 import GoogleApi from '../../utils/GoogleApiComponent'
+import Scrollable from 'hide-scrollbar-react'
 import {HospitalCard} from './hospitalCard'
 import * as env from '../../env'
 import axios from 'axios'
@@ -149,6 +150,7 @@ const MapView = (props) => {
         return (
             <div className="outerHospitalsContainer">
                 {activeHospital.active ? renderActiveHospital(activeHospital.hospital) : null}
+                <Scrollable>
                 <div className="hospitalsContainer">
                     {hospitals.map((hospital, i) => {
                         return (
@@ -164,6 +166,7 @@ const MapView = (props) => {
                         )
                     })}
                 </div>
+                </Scrollable>
             </div>
         )
     }

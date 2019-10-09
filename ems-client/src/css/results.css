@@ -74,20 +74,20 @@
 .outerHospitalsContainer {
     height: 66vw;
     max-height: calc(90vh + 10px);
+    border: 4px solid rgb(28,108,185);
+    border-left: none;
+    overflow: hidden;
 }
 
 .hospitalsContainer {
     height: 100%;
-    /* max-height: calc(90vh + 10px); */
-    overflow-y: scroll;
-    border: 4px solid rgb(28,108,185);
     flex: 1;
 }
 
 
 
 .hospitalDiv {
-    width: 100%;
+    width: calc(100% - 10px);
     padding: 5px;
     height: 18vh;
     outline: none;
@@ -100,10 +100,13 @@
 }
 
 .hospitalDiv.active {
+    width: (100% - 8px);
     background: none;
     background-color: rgb(28,108,185);
+    /* border: 4px solid rgb(28,108,185); */
     color: white;
 }
+
 
 .infoDiv {
     width: calc(100% - 10px);
@@ -144,6 +147,7 @@
 }
 
 .certificationsDiv {
+    /* margin-right: 5px; */
     display: flex;
     flex-direction: column;
     align-items: flex-end;
