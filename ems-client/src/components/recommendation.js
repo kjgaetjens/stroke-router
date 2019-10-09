@@ -26,9 +26,8 @@ const Recommendations = (props) => {
     }
 
     const calcRaceScore = () => {
-
+        console.log(props.triage.tPA)
         let score = 0
-
         Object.keys(props.triage.race).forEach(criteria => {
             if (criteria === "hemiparesis" || props.triage.race[criteria] === null) {
                 return

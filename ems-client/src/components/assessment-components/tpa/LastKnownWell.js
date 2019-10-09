@@ -80,8 +80,8 @@ function LastKnownWell(props) {
             <div className="answer-container">
                 <input type="time" name="lkw-time" onChange={(e) => handleAnswer(e)}></input>
                 {lkwTime == '' ? <button id="disabled-button">Submit</button> : <button onClick={() => submitAnswer()}>Submit</button>}
-                <button onClick={() => props.nextQuestion('RecentSurgery')}>More than 24 hours ago</button>
-                <button onClick={() => props.nextQuestion('RecentSurgery')}>Unknown</button>
+                <button onClick={() => submitNullAnswer()}>More than 24 hours ago</button>
+                <button onClick={() => submitNullAnswer()}>Unknown</button>
             </div>
         </div>
         </React.Fragment>
