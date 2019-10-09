@@ -10,26 +10,31 @@ const Results = (props) => {
     const [component, setComponent] = useState('maps')
 
     const triage = {
-        tPA: {
-            ageUnder80: true,
-            ageOver18: true,
-            ageInRange: true,
-            lastKnownWell: "12:45:00",
-            timeSinceLKW: 3.2,
-            recentSurgery: false,
-            pregnancy: false,
-            anticoagulants: false
-        },
-        race: {
-            facialPalsy: 1,
-            armMotorImpairment: 1,
-            legMotorImpairment: 2,
-            gazeDeviation: 2,
-            hemiparesis: "left",
-            agnosia: 2,
-            aphasia: null
-        }
+        tPA: props.location.state.tpa,
+        race: props.location.state.tpa
     }
+
+    // const triage = {
+    //     tPA: {
+    //         ageUnder80: true,
+    //         ageOver18: true,
+    //         ageInRange: true,
+    //         lastKnownWell: "12:45:00",
+    //         timeSinceLKW: 3.2,
+    //         recentSurgery: false,
+    //         pregnancy: false,
+    //         anticoagulants: false
+    //     },
+    //     race: {
+    //         facialPalsy: 1,
+    //         armMotorImpairment: 1,
+    //         legMotorImpairment: 2,
+    //         gazeDeviation: 2,
+    //         hemiparesis: "left",
+    //         agnosia: 2,
+    //         aphasia: null
+    //     }
+    // }
 
     const [results, setResults] = useState({
         race: null,

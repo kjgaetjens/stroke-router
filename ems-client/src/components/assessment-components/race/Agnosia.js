@@ -16,13 +16,14 @@ function Agnosia(props) {
         )
     }
 
-    const goBack = (answer) => {
+    const goBack = () => {
         props.setAnswer('agnosia', null)
         props.prevQuestion('Hemiparesis')
     }
 
     const submitAnswer = (answer) => {
         props.setAnswer('agnosia', answer)
+        props.completeAssessment()
     }
 
     return (

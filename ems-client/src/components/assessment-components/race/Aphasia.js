@@ -16,13 +16,14 @@ function Aphasia(props) {
         )
     }
 
-    const goBack = (answer) => {
+    const goBack = () => {
         props.setAnswer('aphasia', null)
         props.prevQuestion('Hemiparesis')
     }
 
     const submitAnswer = (answer) => {
         props.setAnswer('aphasia', answer)
+        props.completeAssessment()
     }
 
     return (

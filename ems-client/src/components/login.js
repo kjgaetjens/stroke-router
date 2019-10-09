@@ -51,20 +51,24 @@ const Login = (props) => {
     const renderLogin = () => {
         return (
             <div className="loginContainer">
-                <h1 className="login">Welcome Back!</h1>
-                <div className="inputDiv login">
-                    <label htmlFor="username">Username</label>
-                    <input type="text" name="username" onChange={handleChange} />
+                <div className="pageComponent">
+                    <h1 className="login">Welcome Back!</h1>
+                    <div className="inputDiv login">
+                        <div>
+                        <label htmlFor="username">Username</label>
+                        <input id="username" type="text" name="username" onChange={handleChange} />
+                        </div>
+                        <div>
+                        <label htmlFor="password">Password</label>
+                        <input id="password" type="password" name="password" onChange={handleChange} />
+                        </div>
+                    </div>
+                    <div className="buttonsDiv login">
+                        <button className="submitButton login" onClick={handleSubmit}>Log In</button>
+                        <button className="toggleButton login" onClick={toggleState}>Register</button>
+                    </div>
+                    <span className="errorSpan login">{error}</span>
                 </div>
-                <div className="inputDiv login">
-                    <label htmlFor="password">Password</label>
-                    <input type="password" name="password" onChange={handleChange} />
-                </div>
-                <div className="buttonsDiv login">
-                    <button className="submitButton login" onClick={handleSubmit}>Log In</button>
-                    <button className="toggleButton login" onClick={toggleState}>Register new account</button>
-                </div>
-                <span className="errorSpan login">{error}</span>
             </div>
         )
     }
@@ -78,25 +82,27 @@ const Login = (props) => {
     const renderRegister = () => {
         return (
             <div className="loginContainer">
-                <div className="innerContainer login">
-                    <h1 className="login">Let's get you set up.</h1>
+                <div className="pageComponent">
+                    <h1 className="login">Let's set you up.</h1>
                     <div className="login inputDiv">
+                        <div>
                         <label htmlFor="username">Make a username:</label>
                         <input type="text" name="username" onChange={handleChange} />
-                    </div>
-                    <div className="login inputDiv">
+                        </div>
+                        <div>
                         <label htmlFor="password">Create a password:</label>
                         <input type="password" name="password" onChange={handleChange} />
-                    </div>
-                    <div className="login inputDiv">
+                        </div>
+                        <div>
                         <label htmlFor="password2">Re-enter your password:</label>
                         <input type="password" name="password2" onChange={handleChange} />
                         {passwordFlag()}
+                        </div>
                     </div>
                     <span className="errorSpan login">{error}</span>
                     <div className="login buttonsDiv">
                         <button className="submitButton login" onClick={handleSubmit}>Register</button>
-                        <button className="toggleButton login" onClick={toggleState}>Log in existing account</button>
+                        <button className="toggleButton login" onClick={toggleState}>Log in</button>
                     </div>
                 </div>
             </div>
@@ -106,7 +112,7 @@ const Login = (props) => {
     return (
         <React.Fragment>
             {/* this line might never fire, since manually navigating to login will reset redux state to false */}
-            {props.isAuth ? <Redirect to="/assessment" /> : null}
+            {/* {props.isAuth ? <Redirect to="/assessment" /> : null} */}
             {mode === 'login' ? renderLogin() : renderRegister()}
         </React.Fragment>
     )
