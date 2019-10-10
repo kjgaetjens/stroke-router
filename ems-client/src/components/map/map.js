@@ -7,7 +7,7 @@ import * as env from '../../env'
 
 const Map = withScriptjs(withGoogleMap((props) => 
     <GoogleMap
-      defaultZoom={11}
+      defaultZoom={10}
       defaultCenter={props.center}
     >
       <Marker position={props.center} />

@@ -211,7 +211,10 @@ const MapView = (props) => {
 
     return (
         <div className="pageComponent maps">
-            <button className="submitButton" onClick={props.switchView}>Back to Recommendation</button>
+            <div className="recommendation-header">
+                {/* kg - removed button class */}
+                <button onClick={props.switchView}>{`< Back to Recommendation`}</button>
+            </div>
             <div className="mapAndHospitalsDiv">
                 {location.lat !== 0 ? renderMap() : null}
                 {renderHospitals()}
