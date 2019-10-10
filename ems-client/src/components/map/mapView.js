@@ -38,6 +38,7 @@ const MapView = (props) => {
             if (props.lvo) {
                 hospitals = hospitals.filter(hospital => hospital.CSC === "TRUE")
             }
+            // hospitalCoords(hospitals)
             setHospitals(hospitals)
             setLocation({...location, hospitalsFetched: true})
         })
@@ -50,11 +51,11 @@ const MapView = (props) => {
                 lng: location.lng * Math.PI / 180
             }
 
-                a.lat = a.coords.lat * Math.PI / 180
-                a.lng = a.coords.lng * Math.PI / 180
+                a.lat = a.loc.coordinates.lat * Math.PI / 180
+                a.lng = a.loc.coordinates.lng * Math.PI / 180
 
-                b.lat = b.coords.lat * Math.PI / 180
-                b.lng = b.coords.lng * Math.PI / 180
+                b.lat = b.loc.coordinates.lat * Math.PI / 180
+                b.lng = b.loc.coordinates.lng * Math.PI / 180
 
                 let distA = Math.acos(Math.sin(u.lat) * Math.sin(a.lat) + Math.cos(u.lat) * Math.cos(a.lat) * Math.cos(a.lng - u.lng)) * 3958.76
 
@@ -71,12 +72,11 @@ const MapView = (props) => {
     // const hospitalCoords = async (list) => {
     //     await asyncForEach(list, async (hospital) => {
     //         let location = await fetchCoords(hospital.address)
-    //         let response = await axios.patch(`${env.serverUrl}/hospital`, {
+    //         await axios.patch(`${env.serverUrl}/hospital`, {
     //             hospitalId: hospital._id,
     //             lat: location.lat,
     //             lng: location.lng
     //         })
-    //         console.log(response)
     //     })
     // }
 
@@ -113,8 +113,8 @@ const MapView = (props) => {
             let directionsService = new props.google.maps.DirectionsService()
     
             directionsService.route({
-              origin: location,
-              destination: destination,
+              origin: origin,
+              destination: {lat: destination.lat, lng: destination.lng},
               travelMode: props.google.maps.TravelMode.DRIVING
             },
             (result, status) => {
