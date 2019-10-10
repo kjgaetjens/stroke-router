@@ -212,7 +212,6 @@ const MapView = (props) => {
     return (
         <div className="pageComponent maps">
             <div className="recommendation-header">
-                {/* kg - removed button class */}
                 <button onClick={props.switchView}>{`< Back to Recommendation`}</button>
             </div>
             <div className="mapAndHospitalsDiv">
