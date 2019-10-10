@@ -51,7 +51,7 @@ const Login = (props) => {
     const renderLogin = () => {
         return (
             <div className="loginContainer">
-                <div className="pageComponent">
+                <div className="pageComponent login">
                     <h1 className="login">Welcome Back!</h1>
                     <div className="inputDiv login">
                         <div>
@@ -82,20 +82,20 @@ const Login = (props) => {
     const renderRegister = () => {
         return (
             <div className="loginContainer">
-                <div className="pageComponent">
+                <div className="pageComponent login">
                     <h1 className="login">Let's set you up.</h1>
                     <div className="login inputDiv">
                         <div>
-                        <label htmlFor="username">Make a username:</label>
-                        <input type="text" name="username" onChange={handleChange} />
+                            <label htmlFor="username">Make a username:</label>
+                            <input type="text" name="username" onChange={handleChange} />
                         </div>
                         <div>
-                        <label htmlFor="password">Create a password:</label>
-                        <input type="password" name="password" onChange={handleChange} />
+                            <label htmlFor="password">Create a password:</label>
+                            <input type="password" name="password" onChange={handleChange} />
                         </div>
                         <div>
-                        <label htmlFor="password2">Re-enter your password:</label>
-                        <input type="password" name="password2" onChange={handleChange} />
+                            <label htmlFor="password2">Re-enter your password:</label>
+                            <input type="password" name="password2" onChange={handleChange} />
                         {passwordFlag()}
                         </div>
                     </div>
@@ -111,8 +111,7 @@ const Login = (props) => {
 
     return (
         <React.Fragment>
-            {/* this line might never fire, since manually navigating to login will reset redux state to false */}
-            {/* {props.isAuth ? <Redirect to="/assessment" /> : null} */}
+            {props.isAuth ? <Redirect to="/assessment" /> : null}
             {mode === 'login' ? renderLogin() : renderRegister()}
         </React.Fragment>
     )

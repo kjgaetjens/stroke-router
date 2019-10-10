@@ -51,7 +51,15 @@ app.patch('/hospital', (req,res) => {
     let lat = req.body.lat
     let lng = req.body.lng
 
-    hospitalModels.Hospital.findByIdAndUpdate(hospitalId, {coords: {lat: lat, lng: lng}}, (error, result) => {
+    hospitalModels.Hospital.findByIdAndUpdate(hospitalId, {
+        loc: {
+            type: 'Point',
+            coordinates: {
+                lat: lat,
+                lng: lng
+            }
+        }
+    }, (error, result) => {
         error ? res.json({error: error}) : res.json({result: result})
     })
 })

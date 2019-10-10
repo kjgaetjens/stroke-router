@@ -8,6 +8,18 @@
     align-items: center;
 }
 
+.pageComponent.login {
+    height: 76vh;
+    width: 80%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    box-shadow: 0 3px 21px rgba(0, 0, 0, 0.25), 0 4px 9px rgba(0, 0, 0, 0.22);
+}
+
 .innerContainer.login {
     width: 90%;
     max-width: 500px;

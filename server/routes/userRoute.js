@@ -49,6 +49,8 @@ router.post('/login', (req, res) => {
             bcrypt.compare(req.body.password, user.password, (error, result) => result ? res.json({success: true, token: token, userId: user._id}) : res.json({error: "Incorrect password"}))
         } else if (error) {
             res.json({error: "User does not exist"})
+        } else {
+            res.json({error: "User does not exist"})
         }
     })
 })

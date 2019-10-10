@@ -7,10 +7,17 @@ const coordsSchema = new mongoose.Schema({
 
 const Coords = mongoose.model('Coords', coordsSchema)
 
+const locSchema = new mongoose.Schema({
+    type: String,
+    coordinates: coordsSchema
+})
+
+const Loc = mongoose.model('Loc', locSchema)
+
 const hospitalSchema = new mongoose.Schema({
     name: String,
     address: String,
-    coords: coordsSchema,
+    loc: locSchema,
     CSC: String,
     EVMT: String,
     PSC: String,
@@ -20,4 +27,6 @@ const hospitalSchema = new mongoose.Schema({
 
 const Hospital = mongoose.model('Hospital', hospitalSchema)
 
-module.exports = {Hospital, Coords}
+module.exports = {Hospital, Loc, Coords}
+
+
