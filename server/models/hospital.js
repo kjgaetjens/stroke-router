@@ -1,15 +1,9 @@
 const mongoose = require('mongoose')
 
-const coordsSchema = new mongoose.Schema({
-    lat: Number,
-    lng: Number
-})
-
-const Coords = mongoose.model('Coords', coordsSchema)
 
 const locSchema = new mongoose.Schema({
     type: String,
-    coordinates: coordsSchema
+    coordinates: [Number]
 })
 
 const Loc = mongoose.model('Loc', locSchema)
@@ -27,6 +21,6 @@ const hospitalSchema = new mongoose.Schema({
 
 const Hospital = mongoose.model('Hospital', hospitalSchema)
 
-module.exports = {Hospital, Loc, Coords}
+module.exports = {Hospital, Loc}
 
 
