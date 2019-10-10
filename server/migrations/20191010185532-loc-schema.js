@@ -9,8 +9,8 @@ module.exports = {
           loc: {
             type: 'Point',
             coordinates: {
-              lat: "$coords.lat",
-              lng: "$coords.lng"
+              lat: $coords.lat,
+              lng: $coords.lng
             }
           }
         },

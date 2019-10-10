@@ -13,7 +13,7 @@ export const HospitalCard = (props) => {
     
         directionsService.route({
           origin: props.location,
-          destination: {lat: hospital.loc.coordinates.lat, lng: hospital.loc.coordinates.lng},
+          destination: {lat: hospital.loc.coordinates[1], lng: hospital.loc.coordinates[0]},
           travelMode: props.google.maps.TravelMode.DRIVING
         },
         (result, status) => {

@@ -30,7 +30,8 @@ const MapView = (props) => {
     const [hospitals, setHospitals] = useState([])
 
     const fetchHospitals = () => {
-        axios.get(`${env.serverUrl}/hospital`)
+        // something is fucked up between the query and the response
+        axios.get(`${env.serverUrl}/hospital?lat=${location.lat}&lng=${location.lng}`)
         .then(response => {
             let hospitals = response.data.hospitals
 
@@ -51,11 +52,11 @@ const MapView = (props) => {
                 lng: location.lng * Math.PI / 180
             }
 
-                a.lat = a.loc.coordinates.lat * Math.PI / 180
-                a.lng = a.loc.coordinates.lng * Math.PI / 180
+                a.lat = a.loc.coordinates[1] * Math.PI / 180
+                a.lng = a.loc.coordinates[0] * Math.PI / 180
 
-                b.lat = b.loc.coordinates.lat * Math.PI / 180
-                b.lng = b.loc.coordinates.lng * Math.PI / 180
+                b.lat = b.loc.coordinates[1] * Math.PI / 180
+                b.lng = b.loc.coordinates[0] * Math.PI / 180
 
                 let distA = Math.acos(Math.sin(u.lat) * Math.sin(a.lat) + Math.cos(u.lat) * Math.cos(a.lat) * Math.cos(a.lng - u.lng)) * 3958.76
 
@@ -72,7 +73,7 @@ const MapView = (props) => {
     // const hospitalCoords = async (list) => {
     //     await asyncForEach(list, async (hospital) => {
     //         let location = await fetchCoords(hospital.address)
-    //         await axios.patch(`${env.serverUrl}/hospital`, {
+    //         let result = await axios.patch(`${env.serverUrl}/hospital`, {
     //             hospitalId: hospital._id,
     //             lat: location.lat,
     //             lng: location.lng
@@ -114,7 +115,7 @@ const MapView = (props) => {
     
             directionsService.route({
               origin: origin,
-              destination: {lat: destination.lat, lng: destination.lng},
+              destination: {lat: destination[1], lng: destination[0]},
               travelMode: props.google.maps.TravelMode.DRIVING
             },
             (result, status) => {
@@ -207,6 +208,7 @@ const MapView = (props) => {
         }
         
         locateUser()
+        // fetchHospitals()
     }, [])
 
     return (

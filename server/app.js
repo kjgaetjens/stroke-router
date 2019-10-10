@@ -36,12 +36,25 @@ mongoose.connect(`mongodb+srv://${MONGO_USERNAME}:${MONGO_PASSWORD}@stroke-route
     }
 })
 
-app.get('/hospital', (req,res) => {
+const searchRadius = 30
+const milesToRadians = miles => {
+    return miles / 3959
+}
 
-    let userLat = req.query.lat
-    let userLng = req.query.lng
+app.get('/hospital', (req,res) => {
     
-    hospitalModels.Hospital.find({}, (error, hospitals) => {
+
+    let coords = [req.query.lng, req.query.lat]
+
+    let query = {
+        'loc': {
+            $geoWithin: {
+                $centerSphere: [coords, milesToRadians(searchRadius)]
+            }
+        }
+    }
+    
+    hospitalModels.Hospital.find(query, (error, hospitals) => {
         error ? res.json({error: error}) : res.json({hospitals: hospitals})
     })
 })
@@ -54,10 +67,7 @@ app.patch('/hospital', (req,res) => {
     hospitalModels.Hospital.findByIdAndUpdate(hospitalId, {
         loc: {
             type: 'Point',
-            coordinates: {
-                lat: lat,
-                lng: lng
-            }
+            coordinates: [lng, lat]
         }
     }, (error, result) => {
         error ? res.json({error: error}) : res.json({result: result})
