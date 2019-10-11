@@ -5,12 +5,30 @@ const authenticate = require('../middleware/authMiddleware')
 // router.use('/ems', authenticate.ems)
 // router.use('/ed', authenticate.ed)
 
+const Patient = require('../models/patient')
+
 
 router.post('/ems', (req,res) => {
-    res.json({message: 'ems post route'})
+    let {triage, rec, results} = req.body.patient
+    let patient = {
+        ems: {
+            tpa: triage.tPA,
+            race: {
+                ...triage.race,
+                score: results.race
+            }
+        },
+        rec: {
+                diversion: results.lvo,
+                userLoc: rec.userLocation,
+                hospitalId: rec.hospitalId,
+                recList: rec.recHospitals
+        }
+    }
+    Patient.create(patient, (error, patient) => error ? res.json({error: "Could not send patient"}) : res.json({success: true, patient: patient}))
 })
 
-router.post('/ed', (req,res) => {
+router.get('/ed', (req,res) => {
     res.json({message: 'ed post route'})
 })
 

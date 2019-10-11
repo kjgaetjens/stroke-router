@@ -1,6 +1,6 @@
 const initialState = {
     isAuth: true,
-    userId: "",
+    userId: ""
 }
 
 const reducer = (state = initialState, action) => {

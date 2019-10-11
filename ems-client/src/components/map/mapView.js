@@ -136,6 +136,7 @@ const MapView = (props) => {
                         directionsOn={directions.active}
                         directions={directions.route}
                         getDirections={getDirections}
+                        setActive={setActiveHospital}
                         loadingElement={<div className='loadingElement'style={{ height: `100%` }}>Map is Loading....</div>}
                         containerElement={<div className='containerElement' />}
                         mapElement={<div className='mapElement' />}
@@ -172,27 +173,46 @@ const MapView = (props) => {
         )
     }
 
+    const openGoogle = (hospital) => {
+        let lat = hospital.loc.coordinates[1]
+        let lng = hospital.loc.coordinates[0]
+        window.open(`http://maps.google.com/maps?saddr=${location.lat},${location.lng}&daddr=${lat},${lng}`)
+    }
+
     const renderActiveHospital = (hospital) => {
         return (
             <div key={hospital._id} className="hospitalDiv active">
-            <div className="infoDiv">
-                <span className="hospitalName">{hospital.name}</span>
-                <span className="hospitalAddress">{hospital.address}</span>
-            </div>
-            <div className="attributesDiv">
-                <div className="travelInfoDiv">
-                    <span>{hospital.distance}</span>
-                    <span>{hospital.duration}</span>
+                <div className="infoContainer">
+                <div className="infoDiv">
+                    <span className="hospitalName">{hospital.name}</span>
+                    <span className="hospitalAddress">{hospital.address}</span>
                 </div>
-                <div className="certificationsDiv">
-                    {hospital.CSC === "TRUE" ? <span className="attribute CSC">Comprehensive Stroke Center</    span> : null}
-                    {hospital.EVMT === "TRUE" ? <span className="attribute EVMT">Thrombectomy-Capable</span> : null}
-                    {hospital.PSC === "TRUE" && hospital.CSC === "FALSE" ? <span className="attribute   PSC">Primary Stroke Center</span> : null}
-                    {hospital.TPA === "TRUE" ? <span className="attribute TPA">tPA Available</span> : null}
+                <div className="attributesDiv">
+                    <div className="travelInfoDiv">
+                        <span>{hospital.distance}</span>
+                        <span>{hospital.duration}</span>
+                    </div>
+                    <div className="certificationsDiv">
+                        {hospital.CSC === "TRUE" ? <span className="attribute CSC">Comprehensive Stroke Center</    span> : null}
+                        {hospital.EVMT === "TRUE" ? <span className="attribute EVMT">Thrombectomy-Capable</span> : null}
+                        {hospital.PSC === "TRUE" && hospital.CSC === "FALSE" ? <span className="attribute   PSC">Primary Stroke Center</span> : null}
+                        {hospital.TPA === "TRUE" ? <span className="attribute TPA">tPA Available</span> : null}
+                    </div>
                 </div>
+                </div>
+                <button className="submitButton" onClick={() => openGoogle(hospital)}><i className="fas fa-location-arrow"></i></button>
             </div>
-        </div>
         )
+    }
+
+
+    const renderSendToHospital = () => {
+        if (activeHospital.active) {
+            if (props.patient.sent) {
+                return <button>Patient Info Sent <i className="fas fa-check"></i></button>
+            }
+            return <button onClick={() => props.sendToHospital(activeHospital.hospital._id, hospitals, location)}>Send to Hospital <i className="fas fa-arrow-right"></i></button>
+        }
     }
 
 
@@ -214,10 +234,11 @@ const MapView = (props) => {
     return (
         <div className="pageComponent maps">
             <div className="recommendation-header">
-                <button onClick={props.switchView}>{`< Back to Recommendation`}</button>
+                <button onClick={props.switchView}><i className="fas fa-arrow-left"></i> Back to Recommendation</button>
+                {renderSendToHospital()}
             </div>
             <div className="mapAndHospitalsDiv">
-                {location.lat !== 0 ? renderMap() : null}
+                {location.lat !== 0 && props.google ? renderMap() : null}
                 {renderHospitals()}
             </div>
         </div>
