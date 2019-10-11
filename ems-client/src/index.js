@@ -37,7 +37,7 @@ ReactDOM.render(
             <Switch>
                 <Route exact path='/' component={Login} />
                 <Route path="/assessment" component={Authenticate(Assessment)} />
-                <Route path='/recommendation' component={Authenticate(Results)} />
+                <Route path='/results' component={Authenticate(Results)} />
             </Switch>
         </App>
     </Provider>

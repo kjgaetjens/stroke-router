@@ -74,11 +74,11 @@ function Assessment(props) {
             const lkwDateTime = new Date(lkwYear, lkwMonth, lkwDay, lkwHours, lkwMinutes, lkwSeconds)
     
             const timeSinceLkw = currentDateTime - lkwDateTime
-            const hoursSinceLkw = Math.trunc(timeSinceLkw/3600000)
+            const hoursSinceLkw = Math.round(timeSinceLkw/3600000 * 10) / 10
     
-            props.history.push('/recommendation', {tpa: {...tpa, timeSinceLkw: hoursSinceLkw}, race: race})
+            props.history.push('/results', {tpa: {...tpa, timeSinceLkw: hoursSinceLkw}, race: race})
         } else {
-            props.history.push('/recommendation', {tpa: tpa, race: race})
+            props.history.push('/results', {tpa: tpa, race: race})
         }
 
     }
