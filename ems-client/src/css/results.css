@@ -32,7 +32,7 @@
 
 .pageComponent.maps {
     align-items: flex-start;
-    height: 100vh;
+    height: 100vh; 
 }
 
 .scoreDiv {
@@ -85,23 +85,23 @@
 
 .mapAndHospitalsDiv {
     width: 100%;
-    height: 100%;
+    height: 98vh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
 .mapDiv {
-    flex: 2;
+    width: 100%;
 }
 .mapDiv .containerElement {
     height: calc(100vw/1.5);
-    width: 100vw;
+    width: 100%;
     border-bottom: 4px solid rgb(28,108,185);
 }
 .mapElement {
     height: calc(100vw/1.5) !important;
-    width: calc(100vw);
+    width: 100%;
 }
 
 .mapElement [title="Show street map"] {
@@ -164,15 +164,14 @@
 
 .outerHospitalsContainer {
     height: auto;
+    width: 100%;
     overflow: hidden;
 }
 
 .hospitalsContainer {
     height: 100%;
-    flex: 1;
+    width: 100%;
 }
-
-
 
 .hospitalDiv {
     width: calc(100% - 10px);
