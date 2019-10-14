@@ -22,7 +22,7 @@ const authenticate = require('./middleware/authMiddleware')
 app.all('/*/ems', authenticate.ems)
 // app.all('/ed/*', authenticate.ed)
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT || 8080
 //might have to make global
 const MONGO_USERNAME = process.env.MONGO_USERNAME
 //might have to make global
@@ -40,6 +40,10 @@ const searchRadius = 30
 const milesToRadians = miles => {
     return miles / 3959
 }
+
+app.get('/', (req, res) => {
+    res.send('test')
+})
 
 app.get('/hospital', (req,res) => {
     
