@@ -69,10 +69,10 @@
 }
 
 .recommendation-header {
-    height: 2vh;
+    height: 4vh;
     width: 100%;
     background-color: rgba(28,108,185);
-    border: 6px solid rgba(28,108,185);
+    /* border: 6px solid rgba(28,108,185); */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -85,7 +85,7 @@
 
 .mapAndHospitalsDiv {
     width: 100%;
-    height: 98vh;
+    height: 96vh;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
