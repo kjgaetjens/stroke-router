@@ -41,6 +41,10 @@ const milesToRadians = miles => {
     return miles / 3959
 }
 
+app.get('/', (req, res) => {
+    res.send('test')
+})
+
 app.get('/hospital', (req,res) => {
     
 
