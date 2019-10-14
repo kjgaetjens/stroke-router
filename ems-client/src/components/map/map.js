@@ -1,10 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import {withScriptjs, withGoogleMap, GoogleMap, Marker, DirectionsRenderer} from 'react-google-maps'
 
-
-
-import * as env from '../../env'
-
 const Map = withScriptjs(withGoogleMap((props) => {
 
   const setAsActive = hospital => {

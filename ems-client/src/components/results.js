@@ -81,7 +81,6 @@ const Results = (props) => {
                 ...patient,
                 sent: true
             })
-            console.log(response.data.patient)
         } else if (response.data.error) {
             setError(response.data.error)
         }

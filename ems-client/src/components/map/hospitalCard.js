@@ -24,7 +24,7 @@ export const HospitalCard = (props) => {
                     duration: result.routes[0].legs[0].duration.text
                 })
             } else {
-                console.log(status)
+                console.error(status)
             }
         })
     }
