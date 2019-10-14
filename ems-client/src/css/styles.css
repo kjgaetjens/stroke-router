@@ -10,6 +10,7 @@ button {
 
 .assessment {
     height: 100vh;
+    width: 100vw;
 }
 
 .assessment-header {
@@ -43,12 +44,12 @@ button {
 
 .assessment-container {
     height: 92vh;
-    height: calc(var(--vh, 1vh) * 92);
+    width: 100vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    background-image: linear-gradient(to bottom, rgba(30,144,255,0.7), rgba(30,144,255,0.7)), url("../images/brad-neathery-HgeEtjTkipw-unsplash.jpg");
+    background-image: linear-gradient(to bottom, rgba(30,144,255,0.7), rgba(30,144,255,0.7)), url("../images/bg-photo.jpg");
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -88,7 +89,6 @@ button {
     align-items: center;
     width: 100%;
     margin-bottom: 5vh;
-    margin-bottom: calc(var(--vh, 1vh) * 5);
 }
 
 .answer-container button {
