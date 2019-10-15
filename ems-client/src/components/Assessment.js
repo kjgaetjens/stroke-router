@@ -31,7 +31,7 @@ function Assessment(props) {
     const [tpa, setTpa] = useState({
                                     ageInRange: null | Boolean,
                                     lastKnownWell: null | String,
-                                    timeSinceLkw: null | String,
+                                    timeSinceLKW: null | String,
                                     recentSurgery: null | Boolean,
                                     pregnancy: null | Boolean,
                                     anticoagulants: null | Boolean
@@ -44,7 +44,8 @@ function Assessment(props) {
                                     hemiparesis: null | Boolean,
                                     hemiparesisSide: null | String,
                                     agnosia: null | Number,
-                                    aphasia: null | Number
+                                    aphasia: null | Number,
+                                    ready: false
                                     })
 
     const handleTpaAnswer = (keyName, valueName) => {
@@ -76,7 +77,7 @@ function Assessment(props) {
             const timeSinceLkw = currentDateTime - lkwDateTime
             const hoursSinceLkw = Math.round(timeSinceLkw/3600000 * 10) / 10
     
-            props.history.push('/results', {tpa: {...tpa, timeSinceLkw: hoursSinceLkw}, race: race})
+            props.history.push('/results', {tpa: {...tpa, timeSinceLKW: hoursSinceLkw}, race: race})
         } else {
             props.history.push('/results', {tpa: tpa, race: race})
         }
@@ -143,6 +144,8 @@ function Assessment(props) {
                 return <Aphasia prevQuestion={setComponentToRender} nextQuestion={setComponentToRender} setAnswer={handleRaceAnswer} completeAssessment={sendToCalcScore} />
         }
     }
+
+    if (race.ready) sendToCalcScore()
 
     // useEffect(() => {},[])
 

@@ -65,7 +65,7 @@ function LastKnownWell(props) {
     return (
         <React.Fragment>
         <div className="assessment-header">
-            <button onClick={() => {props.prevQuestion('AgeInRange')}}>{`< Back`}</button>
+            <a onClick={() => {props.prevQuestion('AgeInRange')}}>{`< Back`}</a>
             <h4>tPA Exclusion Assessment</h4>
             <div className="progress-border">
                 <div className="progress-fill"></div>

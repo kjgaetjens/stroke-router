@@ -75,6 +75,7 @@ const Results = (props) => {
     }
 
     const postPatient = async () => {
+        console.log(patient)
         let response = await axios.post(`${env.serverUrl}/patient/ems`, {patient: patient})
         if (response.data.success) {
             setPatient({

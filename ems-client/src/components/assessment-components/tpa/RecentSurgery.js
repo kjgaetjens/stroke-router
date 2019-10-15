@@ -25,7 +25,7 @@ function RecentSurgery(props) {
     return (
         <React.Fragment>
         <div className="assessment-header">
-            <button onClick={() => props.prevQuestion('LastKnownWell')}>{`< Back`}</button>
+            <a onClick={() => props.prevQuestion('LastKnownWell')}>{`< Back`}</a>
             <h4>tPA Exclusion Assessment</h4>
             <div className="progress-border">
                 <div className="progress-fill"></div>

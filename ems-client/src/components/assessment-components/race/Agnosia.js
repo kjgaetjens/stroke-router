@@ -22,14 +22,13 @@ function Agnosia(props) {
     }
 
     const submitAnswer = (answer) => {
-        props.setAnswer('agnosia', answer)
-        props.completeAssessment()
+        props.setAnswer(['agnosia', 'ready'], [answer, true])
     }
 
     return (
         <React.Fragment>
         <div className="assessment-header">
-            <button onClick={() => goBack()}>{`< Back`}</button>
+            <a onClick={() => goBack()}>{`< Back`}</a>
             <h4>RACE Assessment</h4>
             <div className="progress-border">
                 <div className="progress-fill"></div>

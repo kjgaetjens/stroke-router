@@ -26,6 +26,11 @@ button {
     display: inline-block;
 }
 
+.assessment-header a {
+    text-decoration: none;
+    font-size: .9em;
+}
+
 .progress-border {
     height: 15px;
     width: 90%;
@@ -118,7 +123,7 @@ button {
     background-color: white;
     color: black;
     font-weight: bold;
-    width: 74%;
+    width: 84%;
     margin-bottom: 10px;
     border: none;
     border-radius: 5px;

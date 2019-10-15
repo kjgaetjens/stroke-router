@@ -53,6 +53,7 @@ const Login = (props) => {
             <div className="loginContainer">
                 <div className="pageComponent login">
                     <h1 className="login">Welcome Back!</h1>
+                    <h3 style={{"backgroundColor": "#badc58", "borderRadius": "4px", "padding": "10px"}}>Guest Username: guest123<br/>Guest Password: strokeroute</h3>
                     <div className="inputDiv login">
                         <div>
                         <label htmlFor="username">Username</label>
