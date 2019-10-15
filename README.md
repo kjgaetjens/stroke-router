@@ -8,7 +8,7 @@ Stroke Router is an EMS routing application that allows EMS professionals to inp
 When responding to stroke patients, EMS professionals conduct a series of assessments. Stroke Router does not require any additional assessments. Instead, EMS professionals can easily and quickly enter information they are already collecting. Our application makes two major determinations: tPA exclusion and large vessel occlusion. These determinations dictate which hospitals a patient should be routed to. Stroke Router provides the user with a list of these hospitals, along with additional information including hospital classification, distance to, and time to. Stroke Router is a complete end-to-end application that starts with an EMS professional inputting stroke assessment information, and ends with them sending a pre-notification to the hospital they choose and the google maps app opening with directions to the hospital.
 
 View Demo:
-[![Watch the video](readmeImages/strokeroutervimeo.jpg)](https://vimeo.com/366522055)
+[![Watch the video](strokeroutervimeo.jpg)](https://vimeo.com/366522055)
 
 
 Concept 
