@@ -79,7 +79,9 @@
     align-items: center;
 }
 
-.recommendation-header button {
+.recommendation-header a {
+    text-decoration: none;
+    font-size: .9em;
     color: white;
     font-weight: bold;
 }

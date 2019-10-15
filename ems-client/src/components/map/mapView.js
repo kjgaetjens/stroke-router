@@ -209,9 +209,9 @@ const MapView = (props) => {
     const renderSendToHospital = () => {
         if (activeHospital.active) {
             if (props.patient.sent) {
-                return <button>Patient Info Sent <i className="fas fa-check"></i></button>
+                return <a>Patient Info Sent <i className="fas fa-check"></i></a>
             }
-            return <button onClick={() => props.sendToHospital(activeHospital.hospital._id, hospitals, location)}>Send to Hospital <i className="fas fa-arrow-right"></i></button>
+            return <a onClick={() => props.sendToHospital(activeHospital.hospital._id, hospitals, location)}>Send to Hospital <i className="fas fa-arrow-right"></i></a>
         }
     }
 
@@ -234,7 +234,7 @@ const MapView = (props) => {
     return (
         <div className="pageComponent maps">
             <div className="recommendation-header">
-                <button onClick={props.switchView}><i className="fas fa-arrow-left"></i> Back to Recommendation</button>
+                <a onClick={props.switchView}><i className="fas fa-arrow-left"></i> Back to Recommendation</a>
                 {renderSendToHospital()}
             </div>
             <div className="mapAndHospitalsDiv">

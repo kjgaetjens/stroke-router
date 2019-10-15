@@ -11,6 +11,7 @@
 
 .pageComponent.login {
     height: 76vh;
+    min-height: 400px;
     width: 80%;
     background-color: white;
     display: flex;
