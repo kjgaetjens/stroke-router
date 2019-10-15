@@ -22,8 +22,7 @@ function Aphasia(props) {
     }
 
     const submitAnswer = (answer) => {
-        props.setAnswer('aphasia', answer)
-        props.completeAssessment()
+        props.setAnswer(['aphasia', 'ready'], [answer, true])
     }
 
     return (

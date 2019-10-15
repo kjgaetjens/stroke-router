@@ -22,8 +22,7 @@ function Agnosia(props) {
     }
 
     const submitAnswer = (answer) => {
-        props.setAnswer('agnosia', answer)
-        props.completeAssessment()
+        props.setAnswer(['agnosia', 'ready'], [answer, true])
     }
 
     return (
